@@ -53,7 +53,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(85, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Enter user code:";
+            this.label1.Text = "&Enter user code:";
             this.toolTip1.SetToolTip(this.label1, "Hint: your lunch code plus a lower case \"a\"\r\n");
             // 
             // btnClock
