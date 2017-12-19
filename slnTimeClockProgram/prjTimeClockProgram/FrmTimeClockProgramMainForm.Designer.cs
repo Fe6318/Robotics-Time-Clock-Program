@@ -82,11 +82,10 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(691, 668);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(305, 52);
+            this.label2.Size = new System.Drawing.Size(281, 52);
             this.label2.TabIndex = 4;
             this.label2.Text = "Version 0.9. Originally created by: Hayden Mumm,\r\nFor use and modification by Fre" +
-    "edom Robotics team 6318.\r\n\r\nconsider donating: https://freedomengineers6318.weeb" +
-    "ly.com/";
+    "edom Robotics team 6318.\r\n\r\nconsider donating: freedomengineers6318.weebly.com";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
