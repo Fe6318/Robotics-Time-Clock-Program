@@ -85,6 +85,9 @@ namespace prjTimeClockProgram
                 file.WriteLine(lastName);
                 file.WriteLine("0");
             }
+
+            //create a log directory for the user
+            System.IO.Directory.CreateDirectory(strLOG_DIRECTORY + @"\" + firstName + lastName);
         }
 
         private void FrmTimeClockProgramMainForm_Load(object sender, EventArgs e)
@@ -115,9 +118,20 @@ namespace prjTimeClockProgram
                 string line3 = System.IO.File.ReadLines(strAllUserFiles[i]).Skip(2).Take(1).First();
                 string line4 = System.IO.File.ReadLines(strAllUserFiles[i]).Skip(3).Take(1).First();
 
+                //create a log directory for the user
+                System.IO.Directory.CreateDirectory(strLOG_DIRECTORY + @"\" + line2 + line3);
+                
+
+                //create the log files
+                using (System.IO.StreamWriter file =
+                new System.IO.StreamWriter(strLOG_DIRECTORY + @"\" + line2 + line3 + @"\in.6318",true)){}
+
+                using (System.IO.StreamWriter file =
+                new System.IO.StreamWriter(strLOG_DIRECTORY + @"\" + line2 + line3 + @"\out.6318", true)) { }
                 //add a new user with this information
                 lstUsers.Add(new User(line1, line2, line3, double.Parse(line4), false, strLOG_DIRECTORY, strUSER_DIRECTORY));
-            }            
+            }
+            
         }
 
         //when the form closes we want to clock out all the users so no hour counting errors will occur
@@ -125,18 +139,23 @@ namespace prjTimeClockProgram
         {
             base.OnFormClosing(e);
 
-            //confirm we want to close the form
-            DialogResult exit = MessageBox.Show("Are you sure you want to exit?" + Environment.NewLine + Environment.NewLine +  "All Users will be clocked out", "Exit", MessageBoxButtons.YesNo,MessageBoxIcon.Error);
+            //confirm password to close the form
+            Password OPassword = new Password();
+            OPassword.ShowDialog();
 
-            if (exit == DialogResult.No)
+            if (OPassword.getIsCorrectPassword() == false)
             {
+                MessageBox.Show("Incorrect password", "Error", 0, MessageBoxIcon.Error);
                 e.Cancel = true;
             }
-
-            //clock out all users
-            for (int i = 0; lstUsers.Count > i; i++)
+            else
             {
-                lstUsers.ElementAt(i).clockOut();
+
+                //clock out all users
+                for (int i = 0; lstUsers.Count > i; i++)
+                {
+                    lstUsers.ElementAt(i).clockOut();
+                }
             }
         }
 
