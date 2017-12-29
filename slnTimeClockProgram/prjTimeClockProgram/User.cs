@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace prjTimeClockProgram
 {
-    class User
+    public class User
     {
         /*
          * Keeps track of a user. Some of this information is also stored in STARTUPPATH\Information\Users

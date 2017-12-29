@@ -13,10 +13,10 @@ namespace prjTimeClockProgram
 {
     public partial class FrmTimeClockProgramMainForm : Form
     {
-        private static String strINSTALL_DIRECTORY = Application.StartupPath;
-        private static String strINFORMATION_DIRECTORY;
-        private static String strUSER_DIRECTORY;
-        private static String strLOG_DIRECTORY;
+        public String strINSTALL_DIRECTORY = Application.StartupPath;
+        public String strINFORMATION_DIRECTORY;
+        public String strUSER_DIRECTORY;
+        public String strLOG_DIRECTORY;
         public List<User> lstUsers = new List<User>();
 
         public FrmTimeClockProgramMainForm()
