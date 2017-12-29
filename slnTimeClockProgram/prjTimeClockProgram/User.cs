@@ -27,10 +27,23 @@ namespace prjTimeClockProgram
             strUserID = userID;
             strFirstName = firstName;
             strLastName = lastName;
-            dblLoggedHours = loggedHours;
             bolIsClockedIn = isClockedIn;
             strLOG_DIRECTORY = logDirectory;
             strUSER_DIRECTORY = userDirectory;
+
+            double lHours = 0;
+            //calculate the logged hours using the log files
+            for (int i = 0; System.IO.File.ReadLines(strLOG_DIRECTORY + @"\" + firstName + lastName + @"\in.6318").Count() > i;i++)
+            {
+
+                DateTime cIn = DateTime.Parse(System.IO.File.ReadLines(strLOG_DIRECTORY + @"\" + firstName + lastName + @"\in.6318").Skip(i).Take(1).First());
+                DateTime cOut = DateTime.Parse(System.IO.File.ReadLines(strLOG_DIRECTORY + @"\" + firstName + lastName + @"\out.6318").Skip(i).Take(1).First());
+
+                TimeSpan tWorked = cOut.Subtract(cIn);
+                lHours = lHours + tWorked.TotalHours;
+
+            }
+            dblLoggedHours = lHours;
         }
 
         public bool getIsClockedIn()
@@ -79,15 +92,7 @@ namespace prjTimeClockProgram
                 return false;
             }
             dtiClockedIn = DateTime.Now;
-            dtiClockedOut = new DateTime();
-
-            //Log when we clocked in
-            using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(strLOG_DIRECTORY + @"\log.txt", true))
-            {
-                file.WriteLine(getName() + " Clocked In: " + dtiClockedIn.ToShortDateString() + " " + dtiClockedIn.ToLongTimeString());
-            }
-
+            login(dtiClockedIn);
             bolIsClockedIn = true;
             return true;
         }
@@ -112,13 +117,7 @@ namespace prjTimeClockProgram
 
             dtiClockedOut = DateTime.Now;
             bolIsClockedIn = false;
-            //Log when we clocked out
-            using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(strLOG_DIRECTORY + @"\log.txt", true))
-            {
-                file.WriteLine(getName() + " Clocked Out: " + dtiClockedOut.ToShortDateString() + " " + dtiClockedOut.ToLongTimeString());
-            }
-            saveHours(dtiClockedIn, dtiClockedOut);
+            logOut(dtiClockedOut);
             return true;
         }
 
@@ -161,7 +160,7 @@ namespace prjTimeClockProgram
             using (System.IO.StreamWriter file =
             new System.IO.StreamWriter(strLOG_DIRECTORY + @"\" + getFirstName() + getLastName() + @"\in.6318", true))
             {
-                file.WriteLine(cIn.ToShortDateString() + " " + cIn.ToLongTimeString());
+                file.WriteLine(cIn.ToString());
             }
         }
 
@@ -171,7 +170,7 @@ namespace prjTimeClockProgram
             using (System.IO.StreamWriter file =
             new System.IO.StreamWriter(strLOG_DIRECTORY + @"\" + getFirstName() + getLastName() + @"\out.6318", true))
             {
-                file.WriteLine(cOut.ToShortDateString() + " " + cOut.ToLongTimeString());
+                file.WriteLine(cOut.ToString());
             }
         }
 
