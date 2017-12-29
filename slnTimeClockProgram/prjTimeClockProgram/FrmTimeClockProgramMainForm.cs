@@ -17,7 +17,7 @@ namespace prjTimeClockProgram
         private static String strINFORMATION_DIRECTORY;
         private static String strUSER_DIRECTORY;
         private static String strLOG_DIRECTORY;
-        private List<User> lstUsers = new List<User>();
+        public List<User> lstUsers = new List<User>();
 
         public FrmTimeClockProgramMainForm()
         {
