@@ -36,6 +36,7 @@
             this.lblOutput = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnAdministrator = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtUserCode
@@ -89,10 +90,21 @@
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
+            // btnAdministrator
+            // 
+            this.btnAdministrator.Location = new System.Drawing.Point(779, 124);
+            this.btnAdministrator.Name = "btnAdministrator";
+            this.btnAdministrator.Size = new System.Drawing.Size(139, 23);
+            this.btnAdministrator.TabIndex = 5;
+            this.btnAdministrator.Text = "Open Administrator Form";
+            this.btnAdministrator.UseVisualStyleBackColor = true;
+            this.btnAdministrator.Click += new System.EventHandler(this.btnAdministrator_Click);
+            // 
             // FrmTimeClockProgramMainForm
             // 
             this.AcceptButton = this.btnClock;
             this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.Controls.Add(this.btnAdministrator);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblOutput);
             this.Controls.Add(this.btnClock);
@@ -117,6 +129,7 @@
         private System.Windows.Forms.Label lblOutput;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btnAdministrator;
     }
 }
 

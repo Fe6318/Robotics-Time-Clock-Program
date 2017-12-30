@@ -174,6 +174,22 @@ namespace prjTimeClockProgram
             }
         }
 
+        public void updateHours()
+        {
+            double lHours = 0;
+            for (int i = 0; System.IO.File.ReadLines(strLOG_DIRECTORY + @"\" + strFirstName + strLastName + @"\in.6318").Count() > i; i++)
+            {
+
+                DateTime cIn = DateTime.Parse(System.IO.File.ReadLines(strLOG_DIRECTORY + @"\" + strFirstName + strLastName + @"\in.6318").Skip(i).Take(1).First());
+                DateTime cOut = DateTime.Parse(System.IO.File.ReadLines(strLOG_DIRECTORY + @"\" + strFirstName + strLastName + @"\out.6318").Skip(i).Take(1).First());
+
+                TimeSpan tWorked = cOut.Subtract(cIn);
+                lHours = lHours + tWorked.TotalHours;
+
+            }
+            dblLoggedHours = lHours;
+        }
+
         private void saveHours(DateTime cIn, DateTime cOut)
         {
             //store the current user directory

@@ -163,5 +163,21 @@ namespace prjTimeClockProgram
         {
             System.Diagnostics.Process.Start("https://freedomengineers6318.weebly.com/");
         }
+
+        private void btnAdministrator_Click(object sender, EventArgs e)
+        {
+            Password OPassword = new Password();
+            OPassword.ShowDialog();
+
+            if (OPassword.getIsCorrectPassword() == false)
+            {
+                MessageBox.Show("Incorrect password", "Error", 0, MessageBoxIcon.Error);
+            }
+            else
+            {
+                AdministratorForm OAdminForm = new AdministratorForm(this);
+                OAdminForm.ShowDialog();
+            }
+        }
     }
 }
