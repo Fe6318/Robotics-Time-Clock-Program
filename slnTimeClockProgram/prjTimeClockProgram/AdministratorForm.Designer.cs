@@ -148,6 +148,7 @@
             this.Controls.Add(this.lbxOut);
             this.Controls.Add(this.lbxIn);
             this.Name = "AdministratorForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Admin Form";
             this.Load += new System.EventHandler(this.AdministratorForm_Load);
             this.ResumeLayout(false);
