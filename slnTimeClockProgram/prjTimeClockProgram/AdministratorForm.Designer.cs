@@ -38,6 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnPrintCurUser = new System.Windows.Forms.Button();
+            this.btnPrintAllUsersHours = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbxIn
@@ -132,11 +133,22 @@
             this.btnPrintCurUser.UseVisualStyleBackColor = true;
             this.btnPrintCurUser.Click += new System.EventHandler(this.btnPrintCurUser_Click);
             // 
+            // btnPrintAllUsersHours
+            // 
+            this.btnPrintAllUsersHours.Location = new System.Drawing.Point(249, 490);
+            this.btnPrintAllUsersHours.Name = "btnPrintAllUsersHours";
+            this.btnPrintAllUsersHours.Size = new System.Drawing.Size(116, 23);
+            this.btnPrintAllUsersHours.TabIndex = 10;
+            this.btnPrintAllUsersHours.Text = "Print All Users Hours";
+            this.btnPrintAllUsersHours.UseVisualStyleBackColor = true;
+            this.btnPrintAllUsersHours.Click += new System.EventHandler(this.btnPrintAllUsersHours_Click);
+            // 
             // AdministratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(604, 535);
+            this.Controls.Add(this.btnPrintAllUsersHours);
             this.Controls.Add(this.btnPrintCurUser);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -168,5 +180,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnPrintCurUser;
+        private System.Windows.Forms.Button btnPrintAllUsersHours;
     }
 }

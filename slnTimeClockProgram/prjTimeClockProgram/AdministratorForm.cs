@@ -159,5 +159,50 @@ namespace prjTimeClockProgram
         {
             printCurrentUser();
         }
+
+        private void btnPrintAllUsersHours_Click(object sender, EventArgs e)
+        {
+            PrintPreviewDialog printPreviewDialog1 = new PrintPreviewDialog();
+            PrintDocument p = new PrintDocument();
+
+            int y = 15; //y value on the page
+            int itemsPerPage = 0; //items per page
+            int i = 0; //which line we're on
+            p.PrintPage += delegate (object sender1, PrintPageEventArgs e1)
+            {
+                while (lstUser.Count() > i) {
+
+                    //update the users hours first
+                    lstUser.ElementAt(i).updateHours();
+                    //draw the users name
+                    e1.Graphics.DrawString(lstUser.ElementAt(i).getName(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(20, y, p.DefaultPageSettings.PrintableArea.Width, 50));
+                    //draw their total hours
+                    e1.Graphics.DrawString(Math.Round(lstUser.ElementAt(i).getLoggedHours(),2).ToString(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(800, y, p.DefaultPageSettings.PrintableArea.Width, 50));
+
+                    if (itemsPerPage < 35)
+                    {
+                        e1.HasMorePages = false;
+                        y += 30;
+                        itemsPerPage++;
+                    } else
+                    {
+                        e1.HasMorePages = true;
+                        y = 15;
+                        itemsPerPage = 0;
+                        return;
+                    }
+                    i++;
+                }
+            };
+
+                //set the document to the one we just created
+                printPreviewDialog1.Document = p;
+            //set up the print preview
+            printPreviewDialog1.Width = 1280;
+            printPreviewDialog1.Height = 720;
+            printPreviewDialog1.StartPosition = FormStartPosition.CenterParent;
+            //show the print preview
+            printPreviewDialog1.ShowDialog();
+        }
     }
 }

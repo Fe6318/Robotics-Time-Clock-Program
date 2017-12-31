@@ -31,9 +31,19 @@ namespace prjTimeClockProgram
             strLOG_DIRECTORY = logDirectory;
             strUSER_DIRECTORY = userDirectory;
 
+            //create a directory for the user
+            System.IO.Directory.CreateDirectory(strLOG_DIRECTORY + @"\" + firstName + lastName);
+
+            //create the log files
+            using (System.IO.StreamWriter file =
+            new System.IO.StreamWriter(strLOG_DIRECTORY + @"\" + firstName + lastName + @"\in.6318", true)) { }
+
+            using (System.IO.StreamWriter file =
+            new System.IO.StreamWriter(strLOG_DIRECTORY + @"\" + firstName + lastName + @"\out.6318", true)) { }
+
             double lHours = 0;
             //calculate the logged hours using the log files
-            for (int i = 0; System.IO.File.ReadLines(strLOG_DIRECTORY + @"\" + firstName + lastName + @"\in.6318").Count() > i;i++)
+            for (int i = 0; System.IO.File.ReadLines(strLOG_DIRECTORY + @"\" + firstName + lastName + @"\out.6318").Count() > i;i++)
             {
 
                 DateTime cIn = DateTime.Parse(System.IO.File.ReadLines(strLOG_DIRECTORY + @"\" + firstName + lastName + @"\in.6318").Skip(i).Take(1).First());
@@ -177,7 +187,7 @@ namespace prjTimeClockProgram
         public void updateHours()
         {
             double lHours = 0;
-            for (int i = 0; System.IO.File.ReadLines(strLOG_DIRECTORY + @"\" + strFirstName + strLastName + @"\in.6318").Count() > i; i++)
+            for (int i = 0; System.IO.File.ReadLines(strLOG_DIRECTORY + @"\" + strFirstName + strLastName + @"\out.6318").Count() > i; i++)
             {
 
                 DateTime cIn = DateTime.Parse(System.IO.File.ReadLines(strLOG_DIRECTORY + @"\" + strFirstName + strLastName + @"\in.6318").Skip(i).Take(1).First());
