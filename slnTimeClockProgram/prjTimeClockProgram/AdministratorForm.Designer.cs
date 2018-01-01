@@ -47,7 +47,7 @@
             this.lbxIn.Location = new System.Drawing.Point(57, 245);
             this.lbxIn.Name = "lbxIn";
             this.lbxIn.Size = new System.Drawing.Size(170, 186);
-            this.lbxIn.TabIndex = 0;
+            this.lbxIn.TabIndex = 6;
             // 
             // lbxOut
             // 
@@ -55,7 +55,7 @@
             this.lbxOut.Location = new System.Drawing.Point(383, 245);
             this.lbxOut.Name = "lbxOut";
             this.lbxOut.Size = new System.Drawing.Size(170, 186);
-            this.lbxOut.TabIndex = 1;
+            this.lbxOut.TabIndex = 8;
             // 
             // dtpIn
             // 
@@ -64,7 +64,7 @@
             this.dtpIn.Location = new System.Drawing.Point(41, 114);
             this.dtpIn.Name = "dtpIn";
             this.dtpIn.Size = new System.Drawing.Size(200, 20);
-            this.dtpIn.TabIndex = 2;
+            this.dtpIn.TabIndex = 1;
             // 
             // dtpOut
             // 
@@ -82,7 +82,7 @@
             this.cmbSelectedUser.Location = new System.Drawing.Point(236, 57);
             this.cmbSelectedUser.Name = "cmbSelectedUser";
             this.cmbSelectedUser.Size = new System.Drawing.Size(121, 21);
-            this.cmbSelectedUser.TabIndex = 4;
+            this.cmbSelectedUser.TabIndex = 0;
             this.cmbSelectedUser.SelectedIndexChanged += new System.EventHandler(this.cmbSelectedUser_SelectedIndexChanged);
             // 
             // btnModifyIn
@@ -90,7 +90,7 @@
             this.btnModifyIn.Location = new System.Drawing.Point(98, 160);
             this.btnModifyIn.Name = "btnModifyIn";
             this.btnModifyIn.Size = new System.Drawing.Size(75, 23);
-            this.btnModifyIn.TabIndex = 5;
+            this.btnModifyIn.TabIndex = 2;
             this.btnModifyIn.Text = "Modify";
             this.btnModifyIn.UseVisualStyleBackColor = true;
             this.btnModifyIn.Click += new System.EventHandler(this.btnModifyIn_Click);
@@ -100,7 +100,7 @@
             this.btnModifyOut.Location = new System.Drawing.Point(427, 160);
             this.btnModifyOut.Name = "btnModifyOut";
             this.btnModifyOut.Size = new System.Drawing.Size(75, 23);
-            this.btnModifyOut.TabIndex = 6;
+            this.btnModifyOut.TabIndex = 4;
             this.btnModifyOut.Text = "Modify";
             this.btnModifyOut.UseVisualStyleBackColor = true;
             this.btnModifyOut.Click += new System.EventHandler(this.btnModifyOut_Click);
@@ -111,7 +111,7 @@
             this.label1.Location = new System.Drawing.Point(90, 217);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 13);
-            this.label1.TabIndex = 7;
+            this.label1.TabIndex = 5;
             this.label1.Text = "Times Clocked In";
             // 
             // label2
@@ -120,7 +120,7 @@
             this.label2.Location = new System.Drawing.Point(414, 217);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 13);
-            this.label2.TabIndex = 8;
+            this.label2.TabIndex = 7;
             this.label2.Text = "Times Clocked Out";
             // 
             // btnPrintCurUser
