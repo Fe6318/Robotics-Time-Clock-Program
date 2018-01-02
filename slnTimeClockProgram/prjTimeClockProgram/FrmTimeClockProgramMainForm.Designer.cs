@@ -85,8 +85,8 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(278, 26);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Version 0.9. Originally created by: Hayden Mumm,\r\nfor use and modification by Fre" +
-    "edom Robotics team 6318.";
+            this.label2.Text = "Version 1.0.0.0 Originally created by: Hayden Mumm,\r\nfor use and modification by " +
+    "Freedom Robotics team 6318.";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
@@ -114,7 +114,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FrmTimeClockProgramMainForm";
-            this.Text = "Time Clock - V. 0.9";
+            this.Text = "Time Clock - V. 1.0.0.0";
             this.Load += new System.EventHandler(this.FrmTimeClockProgramMainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
