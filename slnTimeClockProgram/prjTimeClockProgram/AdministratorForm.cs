@@ -108,12 +108,12 @@ namespace prjTimeClockProgram
                         //if it's the first page draw the name, and the in and out lower
                         e1.Graphics.DrawString(lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getName(), new Font("Times New Roman", 16), new SolidBrush(Color.Black), new RectangleF(350, 10, p.DefaultPageSettings.PrintableArea.Width, 50));
                         e1.Graphics.DrawString("In", new Font("Times New Roman", 14), new SolidBrush(Color.Black), new RectangleF(90, 30, 30, 20));
-                        e1.Graphics.DrawString("Out", new Font("Times New Roman", 14), new SolidBrush(Color.Black), new RectangleF(765, 30, 50, 20));
+                        e1.Graphics.DrawString("Out", new Font("Times New Roman", 14), new SolidBrush(Color.Black), new RectangleF(755, 30, 50, 20));
                     } else
                     {
                         //if it isn't draw them higher
                         e1.Graphics.DrawString("In", new Font("Times New Roman", 14), new SolidBrush(Color.Black), new RectangleF(90, 10, 30, 20));
-                        e1.Graphics.DrawString("Out", new Font("Times New Roman", 14), new SolidBrush(Color.Black), new RectangleF(765, 10, 50, 20));
+                        e1.Graphics.DrawString("Out", new Font("Times New Roman", 14), new SolidBrush(Color.Black), new RectangleF(755, 10, 50, 20));
 
                     }
 
@@ -122,7 +122,7 @@ namespace prjTimeClockProgram
                     {
                         //write the datetime's
                         e1.Graphics.DrawString(System.IO.File.ReadLines(strUSER_IN_DIR).Skip(i).Take(1).First(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(20, y, 150, 20));
-                        e1.Graphics.DrawString(System.IO.File.ReadLines(strUSER_OUT_DIR).Skip(i).Take(1).First(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(700, y, 150, 20));
+                        e1.Graphics.DrawString(System.IO.File.ReadLines(strUSER_OUT_DIR).Skip(i).Take(1).First(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(690, y, 150, 20));
 
                         //if we can still fit more
                         if (itemsPerPage < 33)
@@ -177,7 +177,7 @@ namespace prjTimeClockProgram
                     //draw the users name
                     e1.Graphics.DrawString(lstUser.ElementAt(i).getName(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(20, y, p.DefaultPageSettings.PrintableArea.Width, 50));
                     //draw their total hours
-                    e1.Graphics.DrawString(Math.Round(lstUser.ElementAt(i).getLoggedHours(),2).ToString(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(800, y, p.DefaultPageSettings.PrintableArea.Width, 50));
+                    e1.Graphics.DrawString(Math.Round(lstUser.ElementAt(i).getLoggedHours(),2).ToString(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(775, y, p.DefaultPageSettings.PrintableArea.Width, 50));
 
                     if (itemsPerPage < 35)
                     {

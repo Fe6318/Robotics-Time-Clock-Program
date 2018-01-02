@@ -41,7 +41,7 @@
             // 
             // txtUserCode
             // 
-            this.txtUserCode.Location = new System.Drawing.Point(120, 71);
+            this.txtUserCode.Location = new System.Drawing.Point(451, 47);
             this.txtUserCode.Name = "txtUserCode";
             this.txtUserCode.Size = new System.Drawing.Size(100, 20);
             this.txtUserCode.TabIndex = 1;
@@ -50,7 +50,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 74);
+            this.label1.Location = new System.Drawing.Point(345, 47);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(85, 13);
             this.label1.TabIndex = 0;
@@ -59,7 +59,7 @@
             // 
             // btnClock
             // 
-            this.btnClock.Location = new System.Drawing.Point(112, 148);
+            this.btnClock.Location = new System.Drawing.Point(444, 131);
             this.btnClock.Name = "btnClock";
             this.btnClock.Size = new System.Drawing.Size(114, 23);
             this.btnClock.TabIndex = 2;
@@ -72,7 +72,7 @@
             this.lblOutput.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lblOutput.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOutput.Location = new System.Drawing.Point(271, 49);
+            this.lblOutput.Location = new System.Drawing.Point(293, 248);
             this.lblOutput.Name = "lblOutput";
             this.lblOutput.Size = new System.Drawing.Size(414, 148);
             this.lblOutput.TabIndex = 3;
@@ -81,18 +81,18 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(691, 668);
+            this.label2.Location = new System.Drawing.Point(718, 654);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(281, 52);
+            this.label2.Size = new System.Drawing.Size(278, 26);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Version 0.9. Originally created by: Hayden Mumm,\r\nFor use and modification by Fre" +
-    "edom Robotics team 6318.\r\n\r\nconsider donating: freedomengineers6318.weebly.com";
+            this.label2.Text = "Version 0.9. Originally created by: Hayden Mumm,\r\nfor use and modification by Fre" +
+    "edom Robotics team 6318.";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // btnAdministrator
             // 
-            this.btnAdministrator.Location = new System.Drawing.Point(779, 124);
+            this.btnAdministrator.Location = new System.Drawing.Point(441, 576);
             this.btnAdministrator.Name = "btnAdministrator";
             this.btnAdministrator.Size = new System.Drawing.Size(139, 23);
             this.btnAdministrator.TabIndex = 4;
