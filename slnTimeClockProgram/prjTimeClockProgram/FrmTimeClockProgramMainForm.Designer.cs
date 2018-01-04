@@ -37,11 +37,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnAdministrator = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtUserCode
             // 
-            this.txtUserCode.Location = new System.Drawing.Point(451, 47);
+            this.txtUserCode.Location = new System.Drawing.Point(190, 65);
             this.txtUserCode.Name = "txtUserCode";
             this.txtUserCode.Size = new System.Drawing.Size(100, 20);
             this.txtUserCode.TabIndex = 1;
@@ -50,7 +51,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(345, 47);
+            this.label1.Location = new System.Drawing.Point(84, 65);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(85, 13);
             this.label1.TabIndex = 0;
@@ -59,7 +60,7 @@
             // 
             // btnClock
             // 
-            this.btnClock.Location = new System.Drawing.Point(444, 131);
+            this.btnClock.Location = new System.Drawing.Point(124, 143);
             this.btnClock.Name = "btnClock";
             this.btnClock.Size = new System.Drawing.Size(114, 23);
             this.btnClock.TabIndex = 2;
@@ -71,28 +72,28 @@
             // 
             this.lblOutput.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lblOutput.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOutput.Location = new System.Drawing.Point(293, 248);
+            this.lblOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOutput.Location = new System.Drawing.Point(403, 224);
             this.lblOutput.Name = "lblOutput";
-            this.lblOutput.Size = new System.Drawing.Size(414, 148);
+            this.lblOutput.Size = new System.Drawing.Size(609, 293);
             this.lblOutput.TabIndex = 3;
             this.lblOutput.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(718, 654);
+            this.label2.Location = new System.Drawing.Point(1047, 669);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(278, 26);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Version 1.0.0.0 Originally created by: Hayden Mumm,\r\nfor use and modification by " +
+            this.label2.Text = "Version 1.0.0.1 Originally created by: Hayden Mumm,\r\nfor use and modification by " +
     "Freedom Robotics team 6318.";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // btnAdministrator
             // 
-            this.btnAdministrator.Location = new System.Drawing.Point(441, 576);
+            this.btnAdministrator.Location = new System.Drawing.Point(1164, 91);
             this.btnAdministrator.Name = "btnAdministrator";
             this.btnAdministrator.Size = new System.Drawing.Size(139, 23);
             this.btnAdministrator.TabIndex = 4;
@@ -100,10 +101,23 @@
             this.btnAdministrator.UseVisualStyleBackColor = true;
             this.btnAdministrator.Click += new System.EventHandler(this.btnAdministrator_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Blue;
+            this.label3.Location = new System.Drawing.Point(49, 682);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(67, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "GitHub page";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
             // FrmTimeClockProgramMainForm
             // 
             this.AcceptButton = this.btnClock;
-            this.ClientSize = new System.Drawing.Size(1008, 729);
+            this.ClientSize = new System.Drawing.Size(1351, 729);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnAdministrator);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblOutput);
@@ -114,7 +128,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FrmTimeClockProgramMainForm";
-            this.Text = "Time Clock - V. 1.0.0.0";
+            this.Text = "Time Clock - V. 1.0.0.1";
             this.Load += new System.EventHandler(this.FrmTimeClockProgramMainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -130,6 +144,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button btnAdministrator;
+        private System.Windows.Forms.Label label3;
     }
 }
 

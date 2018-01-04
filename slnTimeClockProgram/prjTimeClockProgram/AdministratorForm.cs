@@ -130,7 +130,6 @@ namespace prjTimeClockProgram
                             e1.HasMorePages = false; //don't make another page
                             y += 30; //add 30 to the y
                             itemsPerPage++; //one more item on the page
-                            
                         }
                         else
                         {
@@ -198,8 +197,8 @@ namespace prjTimeClockProgram
                 //set the document to the one we just created
                 printPreviewDialog1.Document = p;
             //set up the print preview
-            printPreviewDialog1.Width = 1280;
-            printPreviewDialog1.Height = 720;
+            printPreviewDialog1.Width = 1367;
+            printPreviewDialog1.Height = 768;
             printPreviewDialog1.StartPosition = FormStartPosition.CenterParent;
             //show the print preview
             printPreviewDialog1.ShowDialog();

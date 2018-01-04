@@ -179,5 +179,10 @@ namespace prjTimeClockProgram
                 OAdminForm.ShowDialog();
             }
         }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/hmumm/Robotics-Time-Clock-Program");
+        }
     }
 }
