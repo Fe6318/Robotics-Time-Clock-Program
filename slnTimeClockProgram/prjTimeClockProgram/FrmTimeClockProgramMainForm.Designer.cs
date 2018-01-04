@@ -42,7 +42,7 @@
             // 
             // txtUserCode
             // 
-            this.txtUserCode.Location = new System.Drawing.Point(190, 65);
+            this.txtUserCode.Location = new System.Drawing.Point(222, 130);
             this.txtUserCode.Name = "txtUserCode";
             this.txtUserCode.Size = new System.Drawing.Size(100, 20);
             this.txtUserCode.TabIndex = 1;
@@ -51,7 +51,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(84, 65);
+            this.label1.Location = new System.Drawing.Point(116, 130);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(85, 13);
             this.label1.TabIndex = 0;
@@ -60,9 +60,9 @@
             // 
             // btnClock
             // 
-            this.btnClock.Location = new System.Drawing.Point(124, 143);
+            this.btnClock.Location = new System.Drawing.Point(222, 190);
             this.btnClock.Name = "btnClock";
-            this.btnClock.Size = new System.Drawing.Size(114, 23);
+            this.btnClock.Size = new System.Drawing.Size(100, 23);
             this.btnClock.TabIndex = 2;
             this.btnClock.Text = "&Clock In/Out";
             this.btnClock.UseVisualStyleBackColor = true;
@@ -73,7 +73,7 @@
             this.lblOutput.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lblOutput.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOutput.Location = new System.Drawing.Point(403, 224);
+            this.lblOutput.Location = new System.Drawing.Point(716, 208);
             this.lblOutput.Name = "lblOutput";
             this.lblOutput.Size = new System.Drawing.Size(609, 293);
             this.lblOutput.TabIndex = 3;
@@ -93,7 +93,7 @@
             // 
             // btnAdministrator
             // 
-            this.btnAdministrator.Location = new System.Drawing.Point(1164, 91);
+            this.btnAdministrator.Location = new System.Drawing.Point(207, 433);
             this.btnAdministrator.Name = "btnAdministrator";
             this.btnAdministrator.Size = new System.Drawing.Size(139, 23);
             this.btnAdministrator.TabIndex = 4;
