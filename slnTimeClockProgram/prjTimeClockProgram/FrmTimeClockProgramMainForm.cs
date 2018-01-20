@@ -36,8 +36,10 @@ namespace prjTimeClockProgram
                 {
                     if(lstUsers.ElementAt(i).getIsClockedIn())
                     {
+
                         User curUser = lstUsers.ElementAt(i);
                         curUser.clockOut();
+                        curUser.updateHours();
 
                         //print out information
                         lblOutput.Text = "User: " + curUser.getName() + Environment.NewLine +
@@ -47,6 +49,7 @@ namespace prjTimeClockProgram
                     } else
                     {
                         User curUser = lstUsers.ElementAt(i);
+                        curUser.updateHours();
                         curUser.clockIn();
 
                         //print out information
@@ -74,7 +77,7 @@ namespace prjTimeClockProgram
 
         public void AddNewUser(String userCode, String firstName, String lastName) 
         {
-            lstUsers.Add(new User(userCode,firstName,lastName,0,false,strLOG_DIRECTORY,strUSER_DIRECTORY));
+            lstUsers.Add(new User(userCode,firstName,lastName,0,strLOG_DIRECTORY,strUSER_DIRECTORY));
 
             //save this information to a text file
             using (System.IO.StreamWriter file =
@@ -129,7 +132,7 @@ namespace prjTimeClockProgram
                 using (System.IO.StreamWriter file =
                 new System.IO.StreamWriter(strLOG_DIRECTORY + @"\" + line2 + line3 + @"\out.6318", true)) { }
                 //add a new user with this information
-                lstUsers.Add(new User(line1, line2, line3, double.Parse(line4), false, strLOG_DIRECTORY, strUSER_DIRECTORY));
+                lstUsers.Add(new User(line1, line2, line3, double.Parse(line4), strLOG_DIRECTORY, strUSER_DIRECTORY));
             }
             
         }

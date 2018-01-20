@@ -32,6 +32,8 @@ namespace prjTimeClockProgram
             {
                 cmbSelectedUser.Items.Add(lstUser.ElementAt(i).getName());
             }
+
+            //changing the index will cause it to update and have it load each list box
             cmbSelectedUser.SelectedIndex = 0;
 
         }
@@ -48,6 +50,13 @@ namespace prjTimeClockProgram
 
         private void btnModifyIn_Click(object sender, EventArgs e)
         {
+            //check if no value is selected
+            if(lbxIn.SelectedIndex == -1)
+            {
+                MessageBox.Show("No value is selected", "Error", 0, MessageBoxIcon.Error);
+                return;
+            }
+
             //read the file into an array
             string[] arrLine = File.ReadAllLines(mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getFirstName() + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getLastName() + @"\in.6318");
             //change the selected value in the array
@@ -63,6 +72,13 @@ namespace prjTimeClockProgram
 
         private void btnModifyOut_Click(object sender, EventArgs e)
         {
+            //check if no value is selected
+            if (lbxOut.SelectedIndex == -1)
+            {
+                MessageBox.Show("No value is selected", "Error", 0, MessageBoxIcon.Error);
+                return;
+            }
+
             //read the file into the array
             string[] arrLine = File.ReadAllLines(mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getFirstName() + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getLastName() + @"\out.6318");
             //change the selected value in the array
@@ -86,8 +102,12 @@ namespace prjTimeClockProgram
             //read all the datetime's back in and put them in the list boxes
             for (int i = 0; System.IO.File.ReadLines(mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getFirstName() + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getLastName() + @"\out.6318").Count() > i; i++)
             {
-                lbxIn.Items.Add(DateTime.Parse(System.IO.File.ReadLines(mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getFirstName() + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getLastName() + @"\in.6318").Skip(i).Take(1).First()));
                 lbxOut.Items.Add(DateTime.Parse(System.IO.File.ReadLines(mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getFirstName() + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getLastName() + @"\out.6318").Skip(i).Take(1).First()));
+            }
+            
+            for (int i = 0; System.IO.File.ReadLines(mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getFirstName() + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getLastName() + @"\in.6318").Count() > i; i++)
+            {
+                lbxIn.Items.Add(DateTime.Parse(System.IO.File.ReadLines(mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getFirstName() + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getLastName() + @"\in.6318").Skip(i).Take(1).First()));
             }
         }
         private void printCurrentUser()
@@ -101,19 +121,31 @@ namespace prjTimeClockProgram
             int itemsPerPage = 0; //items per page
             int i = 0; //which line we're on
             bool isFirstPage = true; //wether we are on the first page or not
+            int offset = 25;
             p.PrintPage += delegate (object sender1, PrintPageEventArgs e1)
                 {
+                    //Reset the variables
+                    if(!e1.HasMorePages)
+                    {
+                        y = 70;
+                        itemsPerPage = 0;
+                        i = 0;
+                        isFirstPage = true;
+
+                    }
+
+
                     if (isFirstPage)
                     {
                         //if it's the first page draw the name, and the in and out lower
-                        e1.Graphics.DrawString(lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getName(), new Font("Times New Roman", 16), new SolidBrush(Color.Black), new RectangleF(350, 10, p.DefaultPageSettings.PrintableArea.Width, 50));
-                        e1.Graphics.DrawString("In", new Font("Times New Roman", 14), new SolidBrush(Color.Black), new RectangleF(90, 30, 30, 20));
-                        e1.Graphics.DrawString("Out", new Font("Times New Roman", 14), new SolidBrush(Color.Black), new RectangleF(755, 30, 50, 20));
+                        e1.Graphics.DrawString(lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getName(), new Font("Times New Roman", 16), new SolidBrush(Color.Black), new RectangleF(350 - offset, 10, p.DefaultPageSettings.PrintableArea.Width, 50));
+                        e1.Graphics.DrawString("In", new Font("Times New Roman", 14), new SolidBrush(Color.Black), new RectangleF(90 - offset, 30, 30, 20));
+                        e1.Graphics.DrawString("Out", new Font("Times New Roman", 14), new SolidBrush(Color.Black), new RectangleF(755 - offset, 30, 50, 20));
                     } else
                     {
                         //if it isn't draw them higher
-                        e1.Graphics.DrawString("In", new Font("Times New Roman", 14), new SolidBrush(Color.Black), new RectangleF(90, 10, 30, 20));
-                        e1.Graphics.DrawString("Out", new Font("Times New Roman", 14), new SolidBrush(Color.Black), new RectangleF(730, 10, 50, 20));
+                        e1.Graphics.DrawString("In", new Font("Times New Roman", 14), new SolidBrush(Color.Black), new RectangleF(90 - offset, 10, 30, 20));
+                        e1.Graphics.DrawString("Out", new Font("Times New Roman", 14), new SolidBrush(Color.Black), new RectangleF(730 - offset, 10, 50, 20));
 
                     }
 
@@ -121,8 +153,8 @@ namespace prjTimeClockProgram
                     while (System.IO.File.ReadLines(strUSER_OUT_DIR).Count() > i)
                     {
                         //write the datetime's
-                        e1.Graphics.DrawString(System.IO.File.ReadLines(strUSER_IN_DIR).Skip(i).Take(1).First(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(20, y, 175, 20));
-                        e1.Graphics.DrawString(System.IO.File.ReadLines(strUSER_OUT_DIR).Skip(i).Take(1).First(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(675, y, 175, 20));
+                        e1.Graphics.DrawString(System.IO.File.ReadLines(strUSER_IN_DIR).Skip(i).Take(1).First(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(30 - offset, y, 175, 20));
+                        e1.Graphics.DrawString(System.IO.File.ReadLines(strUSER_OUT_DIR).Skip(i).Take(1).First(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(675 - offset, y, 175, 20));
 
                         //if we can still fit more
                         if (itemsPerPage < 33)
@@ -169,6 +201,14 @@ namespace prjTimeClockProgram
             int i = 0; //which line we're on
             p.PrintPage += delegate (object sender1, PrintPageEventArgs e1)
             {
+                //reset the starting variables
+                if(!e1.HasMorePages)
+                {
+                    y = 15;
+                    itemsPerPage = 0;
+                    i = 0;
+                }
+
                 while (lstUser.Count() > i) {
 
                     //update the users hours first
@@ -176,7 +216,7 @@ namespace prjTimeClockProgram
                     //draw the users name
                     e1.Graphics.DrawString(lstUser.ElementAt(i).getName(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(20, y, p.DefaultPageSettings.PrintableArea.Width, 50));
                     //draw their total hours
-                    e1.Graphics.DrawString(Math.Round(lstUser.ElementAt(i).getLoggedHours(),2).ToString(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(775, y, p.DefaultPageSettings.PrintableArea.Width, 50));
+                    e1.Graphics.DrawString(Math.Round(lstUser.ElementAt(i).getLoggedHours(),2).ToString(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(750, y, p.DefaultPageSettings.PrintableArea.Width, 50));
 
                     if (itemsPerPage < 35)
                     {
@@ -202,6 +242,130 @@ namespace prjTimeClockProgram
             printPreviewDialog1.StartPosition = FormStartPosition.CenterParent;
             //show the print preview
             printPreviewDialog1.ShowDialog();
+        }
+
+        private void btnDeleteIn_Click(object sender, EventArgs e)
+        {
+            String strInDirectory = mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getFirstName() + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getLastName() + @"\in.6318";
+
+            //check if no value is selected
+            if (lbxIn.SelectedIndex == -1)
+            {
+                MessageBox.Show("No value is selected", "Error", 0, MessageBoxIcon.Error);
+                return;
+            }
+
+
+            //read the file into an array
+            string[] arrLine = File.ReadAllLines(strInDirectory);
+            //put the array into a list
+            List<String> lstLine = new List<String>(arrLine);
+            //change the selected value in the list
+            lstLine.RemoveAt(lbxIn.SelectedIndex);
+            //change back into an array
+            arrLine = lstLine.ToArray();
+            //write the array back to the file
+            File.WriteAllLines(strInDirectory, arrLine);
+
+            //update the logged hours
+            lstUser.ElementAt(cmbSelectedUser.SelectedIndex).updateHours();
+
+            updateListBoxes();
+
+        }
+
+        private void btnDeleteOut_Click(object sender, EventArgs e)
+        {
+            String strOutDirectory = mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getFirstName() + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getLastName() + @"\out.6318";
+
+            //check if no value is selected
+            if (lbxOut.SelectedIndex == -1)
+            {
+                MessageBox.Show("No value is selected", "Error", 0, MessageBoxIcon.Error);
+                return;
+            }
+
+
+            //read the file into an array
+            string[] arrLine = File.ReadAllLines(strOutDirectory);
+            //put the array into a list
+            List<String> lstLine = new List<String>(arrLine);
+            //change the selected value in the list
+            lstLine.RemoveAt(lbxOut.SelectedIndex);
+            //change back into an array
+            arrLine = lstLine.ToArray();
+            //write the array back to the file
+            File.WriteAllLines(strOutDirectory, arrLine);
+
+            //update the logged hours
+            lstUser.ElementAt(cmbSelectedUser.SelectedIndex).updateHours();
+
+            updateListBoxes();
+        }
+
+        private void btnAddIn_Click(object sender, EventArgs e)
+        {
+            String strInDirectory = mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getFirstName() + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getLastName() + @"\in.6318";
+            int intSelectedIndex = lbxIn.SelectedIndex;
+
+            //read the file into an array
+            string[] arrLine = File.ReadAllLines(strInDirectory);
+            //put the array into a list
+            List<String> lstLine = new List<String>(arrLine);
+            if (intSelectedIndex == -1)
+            {
+                lstLine.Insert(0, dtpOut.Value.ToString());
+            }
+            else
+            {
+                //add the selected value in the list
+                lstLine.Insert(intSelectedIndex + 1,dtpIn.Value.ToString());
+            }
+            //change back into an array
+            arrLine = lstLine.ToArray();
+            //write the array back to the file
+            File.WriteAllLines(strInDirectory, arrLine);
+
+            //update the logged hours
+            lstUser.ElementAt(cmbSelectedUser.SelectedIndex).updateHours();
+
+            updateListBoxes();
+        }
+
+        private void btnAddOut_Click(object sender, EventArgs e)
+        {
+            String strOutDirectory = mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getFirstName() + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).getLastName() + @"\out.6318";
+            int intSelectedIndex = lbxIn.SelectedIndex;
+
+            if(lbxOut.Items.Count + 1 > lbxIn.Items.Count)
+            {
+                MessageBox.Show("Out can't contain more time's then in", "Error", 0, MessageBoxIcon.Error);
+                return;
+            }
+
+            //read the file into an array
+            string[] arrLine = File.ReadAllLines(strOutDirectory);
+            //put the array into a list
+            List<string> lstLine = new List<string>(arrLine);
+
+            if (intSelectedIndex == -1)
+            {
+                lstLine.Insert(0, dtpOut.Value.ToString());
+            }
+            else
+            {
+                //add the selected value in the list
+                lstLine.Insert(intSelectedIndex + 1, dtpOut.Value.ToString());
+            }
+            //change back into an array
+            arrLine = lstLine.ToArray();
+            //write the array back to the file
+            File.WriteAllLines(strOutDirectory, arrLine);
+
+            //update the logged hours
+            lstUser.ElementAt(cmbSelectedUser.SelectedIndex).updateHours();
+
+            updateListBoxes();
         }
     }
 }

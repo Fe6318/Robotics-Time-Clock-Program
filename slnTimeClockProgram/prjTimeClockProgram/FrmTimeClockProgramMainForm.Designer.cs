@@ -44,7 +44,7 @@
             // 
             this.txtUserCode.Location = new System.Drawing.Point(222, 130);
             this.txtUserCode.Name = "txtUserCode";
-            this.txtUserCode.Size = new System.Drawing.Size(100, 20);
+            this.txtUserCode.Size = new System.Drawing.Size(100, 22);
             this.txtUserCode.TabIndex = 1;
             this.txtUserCode.UseSystemPasswordChar = true;
             // 
@@ -53,7 +53,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(116, 130);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 13);
+            this.label1.Size = new System.Drawing.Size(113, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "&Enter user code:";
             this.toolTip1.SetToolTip(this.label1, "Hint: your lunch code plus a lower case \"a\"\r\n");
@@ -84,9 +84,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(1047, 669);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(278, 26);
+            this.label2.Size = new System.Drawing.Size(372, 34);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Version 1.0.0.1 Originally created by: Hayden Mumm,\r\nfor use and modification by " +
+            this.label2.Text = "Version 1.0.1.0 Originally created by: Hayden Mumm,\r\nfor use and modification by " +
     "Freedom Robotics team 6318.";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label2.Click += new System.EventHandler(this.label2_Click);
@@ -108,7 +108,7 @@
             this.label3.ForeColor = System.Drawing.Color.Blue;
             this.label3.Location = new System.Drawing.Point(49, 682);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(67, 13);
+            this.label3.Size = new System.Drawing.Size(88, 17);
             this.label3.TabIndex = 6;
             this.label3.Text = "GitHub page";
             this.label3.Click += new System.EventHandler(this.label3_Click);
@@ -116,7 +116,8 @@
             // FrmTimeClockProgramMainForm
             // 
             this.AcceptButton = this.btnClock;
-            this.ClientSize = new System.Drawing.Size(1351, 729);
+            this.AccessibleDescription = "A program used to track attendance for robotics members";
+            this.ClientSize = new System.Drawing.Size(1349, 721);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnAdministrator);
             this.Controls.Add(this.label2);
@@ -126,9 +127,8 @@
             this.Controls.Add(this.txtUserCode);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
             this.Name = "FrmTimeClockProgramMainForm";
-            this.Text = "Time Clock - V. 1.0.0.1";
+            this.Text = "Time Clock - V. 1.0.1.0";
             this.Load += new System.EventHandler(this.FrmTimeClockProgramMainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

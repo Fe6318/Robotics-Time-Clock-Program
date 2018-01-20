@@ -22,12 +22,12 @@ namespace prjTimeClockProgram
         private String strUSER_DIRECTORY;
 
 
-        public User(String userID, String firstName, String lastName, double loggedHours, bool isClockedIn, String logDirectory, String userDirectory)
+        public User(String userID, String firstName, String lastName, double loggedHours, String logDirectory, String userDirectory)
         {
             strUserID = userID;
             strFirstName = firstName;
             strLastName = lastName;
-            bolIsClockedIn = isClockedIn;
+            
             strLOG_DIRECTORY = logDirectory;
             strUSER_DIRECTORY = userDirectory;
 
@@ -40,6 +40,15 @@ namespace prjTimeClockProgram
 
             using (System.IO.StreamWriter file =
             new System.IO.StreamWriter(strLOG_DIRECTORY + @"\" + firstName + lastName + @"\out.6318", true)) { }
+
+            if(System.IO.File.ReadLines(strLOG_DIRECTORY + @"\" + firstName + lastName + @"\in.6318").Count() > System.IO.File.ReadLines(strLOG_DIRECTORY + @"\" + firstName + lastName + @"\out.6318").Count())
+            {
+                bolIsClockedIn = true;
+                dtiClockedIn = DateTime.Parse(System.IO.File.ReadLines(strLOG_DIRECTORY + @"\" + firstName + lastName + @"\in.6318").Skip(System.IO.File.ReadLines(strLOG_DIRECTORY + @"\" + firstName + lastName + @"\in.6318").Count() - 1).Take(1).First());
+            } else
+            {
+                bolIsClockedIn = false;
+            }
 
             double lHours = 0;
             //calculate the logged hours using the log files
