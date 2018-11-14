@@ -34,7 +34,7 @@ namespace prjTimeClockProgram
             }
 
             //changing the index will cause it to update and have it load each list box
-            cmbSelectedUser.SelectedIndex = 0;
+            //cmbSelectedUser.SelectedIndex = 0;
 
         }
 
