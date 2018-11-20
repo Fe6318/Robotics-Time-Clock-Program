@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{80C7A2CF-D0CC-4608-91D6-11B51BA124C3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>prjTimeClockProgram</RootNamespace>
-    <AssemblyName>prjTimeClockProgram</AssemblyName>
+    <RootNamespace>FE6318.TimeClockProgram.UI</RootNamespace>
+    <AssemblyName>FE6318.TimeClockProgram.UI</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -53,7 +53,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>prjTimeClockProgram.Program</StartupObject>
+    <StartupObject>FE6318.TimeClockProgram.UI.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>clock.ico</ApplicationIcon>
@@ -145,7 +145,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs" />
     <EmbeddedResource Include="AdministratorForm.resx">
       <DependentUpon>AdministratorForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -166,12 +165,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="client_secret_907685699864-6m1ad8gglv4g90u4ummkh113bu51gggh.apps.googleusercontent.com.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
-    <None Include="prjTimeClockProgram_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -199,6 +195,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FE6318.TimeClockProgram.BusinessLayer\FE6318.TimeClockProgram.BusinessLayer.csproj">
+      <Project>{95448c8b-7dad-4b5e-b6cd-78c8538980ad}</Project>
+      <Name>FE6318.TimeClockProgram.BusinessLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

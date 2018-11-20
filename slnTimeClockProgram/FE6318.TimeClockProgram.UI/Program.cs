@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace prjTimeClockProgram
+namespace FE6318.TimeClockProgram.UI
 {
     static class Program
     {

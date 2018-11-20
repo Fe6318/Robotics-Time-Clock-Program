@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FE6318.TimeClockProgram.BusinessLayer;
 
-
-namespace prjTimeClockProgram
+namespace FE6318.TimeClockProgram.UI
 {
     public partial class FrmTimeClockProgramMainForm : Form
     {
@@ -143,10 +143,10 @@ namespace prjTimeClockProgram
             base.OnFormClosing(e);
 
             //confirm password to close the form
-            Password OPassword = new Password();
-            OPassword.ShowDialog();
+            Password password = new Password();
+            password.ShowDialog();
 
-            if (OPassword.getIsCorrectPassword() == false)
+            if (password.getIsCorrectPassword() == false)
             {
                 MessageBox.Show("Incorrect password", "Error", 0, MessageBoxIcon.Error);
                 e.Cancel = true;

@@ -1,4 +1,4 @@
-﻿namespace prjTimeClockProgram
+﻿namespace FE6318.TimeClockProgram.UI
 {
     partial class Password
     {

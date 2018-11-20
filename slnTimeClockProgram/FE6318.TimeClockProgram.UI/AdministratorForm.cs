@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Printing;
+using FE6318.TimeClockProgram.BusinessLayer;
 
-namespace prjTimeClockProgram
+namespace FE6318.TimeClockProgram.UI
 {
     public partial class AdministratorForm : Form
     {

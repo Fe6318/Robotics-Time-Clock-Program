@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace prjTimeClockProgram
+namespace FE6318.TimeClockProgram.BusinessLayer
 {
     public class User
     {
