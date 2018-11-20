@@ -184,7 +184,7 @@ namespace FE6318.TimeClockProgram.BusinessLayer
                 DateTime cOut = DateTime.Parse(System.IO.File.ReadLines(logDirectory + @"\" + firstName + lastName + @"\out.6318").Skip(i).Take(1).First());
 
                 TimeSpan tWorked = cOut.Subtract(cIn);
-                lHours = lHours + tWorked.TotalHours;
+                lHours += tWorked.TotalHours;
 
             }
             loggedHours = lHours;

@@ -32,9 +32,9 @@ namespace FE6318.TimeClockProgram.UI
             for (int i = 0; lstUsers.Count() > i; i++)
             {
                 //if it matches clock in or out
-                if(lstUsers.ElementAt(i).getUserID().Equals(strCurrentUserCode))
+                if(lstUsers.ElementAt(i).UserID.Equals(strCurrentUserCode))
                 {
-                    if(lstUsers.ElementAt(i).getIsClockedIn())
+                    if(lstUsers.ElementAt(i).IsClockedIn)
                     {
 
                         User curUser = lstUsers.ElementAt(i);
@@ -42,10 +42,10 @@ namespace FE6318.TimeClockProgram.UI
                         curUser.updateHours();
 
                         //print out information
-                        lblOutput.Text = "User: " + curUser.getName() + Environment.NewLine +
+                        lblOutput.Text = "User: " + curUser.Name + Environment.NewLine +
                                          "Clocked out: " + curUser.getFormatedClockOutTime() + Environment.NewLine +
                                          "Hours this session: " + Math.Round(curUser.getNumberOfHoursElapsedBetweenClocks(),2).ToString() + Environment.NewLine +
-                                         "Total hours: " + Math.Round(curUser.getLoggedHours(),2).ToString();
+                                         "Total hours: " + Math.Round(curUser.LoggedHours,2).ToString();
                     } else
                     {
                         User curUser = lstUsers.ElementAt(i);
@@ -53,9 +53,9 @@ namespace FE6318.TimeClockProgram.UI
                         curUser.clockIn();
 
                         //print out information
-                        lblOutput.Text = "User: " + curUser.getName() + Environment.NewLine +
+                        lblOutput.Text = "User: " + curUser.Name + Environment.NewLine +
                                          "Clocked in: " + curUser.getFormatedClockInTime() + Environment.NewLine +
-                                         "Total hours: " + Math.Round(curUser.getLoggedHours(),2).ToString();
+                                         "Total hours: " + Math.Round(curUser.LoggedHours,2).ToString();
 
                     }
                     txtUserCode.Focus();
