@@ -23,13 +23,13 @@ namespace FE6318.TimeClockProgram.UI
         {
             InitializeComponent();
             this.mainForm = mainForm;
-            lstUser = mainForm.lstUsers;
+            lstUser = mainForm.userList;
         }
 
         private void AdministratorForm_Load(object sender, EventArgs e)
         {
             //add each user's name into the drop down box
-            for (int i = 0; mainForm.lstUsers.Count > i; i++)
+            for (int i = 0; mainForm.userList.Count > i; i++)
             {
                 cmbSelectedUser.Items.Add(lstUser.ElementAt(i).Name);
             }

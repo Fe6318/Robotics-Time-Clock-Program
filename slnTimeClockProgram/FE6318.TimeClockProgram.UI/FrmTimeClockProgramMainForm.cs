@@ -17,7 +17,7 @@ namespace FE6318.TimeClockProgram.UI
         public String strINFORMATION_DIRECTORY;
         public String strUSER_DIRECTORY;
         public String strLOG_DIRECTORY;
-        public List<User> lstUsers = new List<User>();
+        public UserList userList = new UserList();
 
         public FrmTimeClockProgramMainForm()
         {
@@ -27,57 +27,61 @@ namespace FE6318.TimeClockProgram.UI
         private void btnClock_Click(object sender, EventArgs e)
         {
             String strCurrentUserCode = txtUserCode.Text;
+            User curUser = null;
 
             //run through all the users and find the matching user code
-            for (int i = 0; lstUsers.Count() > i; i++)
+            for (int i = 0; userList.Count() > i; i++)
             {
                 //if it matches clock in or out
-                if(lstUsers.ElementAt(i).UserID.Equals(strCurrentUserCode))
+                if(userList.ElementAt(i).UserID.Equals(strCurrentUserCode))
                 {
-                    if(lstUsers.ElementAt(i).IsClockedIn)
-                    {
-
-                        User curUser = lstUsers.ElementAt(i);
-                        curUser.clockOut();
-                        curUser.updateHours();
-
-                        //print out information
-                        lblOutput.Text = "User: " + curUser.Name + Environment.NewLine +
-                                         "Clocked out: " + curUser.getFormatedClockOutTime() + Environment.NewLine +
-                                         "Hours this session: " + Math.Round(curUser.getNumberOfHoursElapsedBetweenClocks(),2).ToString() + Environment.NewLine +
-                                         "Total hours: " + Math.Round(curUser.LoggedHours,2).ToString();
-                    } else
-                    {
-                        User curUser = lstUsers.ElementAt(i);
-                        curUser.updateHours();
-                        curUser.clockIn();
-
-                        //print out information
-                        lblOutput.Text = "User: " + curUser.Name + Environment.NewLine +
-                                         "Clocked in: " + curUser.getFormatedClockInTime() + Environment.NewLine +
-                                         "Total hours: " + Math.Round(curUser.LoggedHours,2).ToString();
-
-                    }
-                    txtUserCode.Focus();
-                    txtUserCode.SelectAll();
-                    return;
+                    curUser = userList[i];
                 }
             }
 
-            //if it makes it past the for loop then no user exists with that user code
-            if (strCurrentUserCode.Equals("+R+I+C+Ka")) { System.Diagnostics.Process.Start("https://youtu.be/dQw4w9WgXcQ"); return; }
-                //message box will show the messagebox then if the user answers yes it will launch the new form. If they say no the program will continue as normal
-            if (MessageBox.Show("No such User exists."+ Environment.NewLine + Environment.NewLine +  "Create New User?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            if(curUser == null)
             {
+                if (strCurrentUserCode.Equals("+R+I+C+Ka")) { System.Diagnostics.Process.Start("https://youtu.be/dQw4w9WgXcQ"); return; }
+
                 NewUser newUser = new NewUser(this);
-                
+
                 newUser.ShowDialog();
+                return;
+            }
+
+            if (curUser.IsClockedIn)
+            {
+                
+                curUser.clockOut();
+                curUser.updateHours();
+                PrintUserInfo(curUser);
+            }
+            else
+            {
+                curUser.updateHours();
+                curUser.clockIn();
+                PrintUserInfo(curUser);
+
+            }
+            txtUserCode.Focus();
+            txtUserCode.SelectAll();
+                
+        }
+
+        public void PrintUserInfo(User user)
+        {
+            lblOutput.Text = "User: " + user.Name + Environment.NewLine +
+                             "Clocked in: " + user.getFormatedClockInTime() + Environment.NewLine +
+                             "Total hours: " + Math.Round(user.LoggedHours, 2).ToString();
+            if (!user.IsClockedIn)
+            {
+                lblOutput.Text = lblOutput.Text + Environment.NewLine + "Hours this session: " + Math.Round(user.getNumberOfHoursElapsedBetweenClocks(),2);
             }
         }
 
         public void AddNewUser(String userCode, String firstName, String lastName) 
         {
-            lstUsers.Add(new User(userCode,firstName,lastName,0,strLOG_DIRECTORY,strUSER_DIRECTORY));
+            userList.Add(new User(userCode,firstName,lastName,0,strLOG_DIRECTORY,strUSER_DIRECTORY));
 
             //save this information to a text file
             using (System.IO.StreamWriter file =
@@ -132,7 +136,7 @@ namespace FE6318.TimeClockProgram.UI
                 using (System.IO.StreamWriter file =
                 new System.IO.StreamWriter(strLOG_DIRECTORY + @"\" + line2 + line3 + @"\out.6318", true)) { }
                 //add a new user with this information
-                lstUsers.Add(new User(line1, line2, line3, double.Parse(line4), strLOG_DIRECTORY, strUSER_DIRECTORY));
+                userList.Add(new User(line1, line2, line3, double.Parse(line4), strLOG_DIRECTORY, strUSER_DIRECTORY));
             }
             
         }
@@ -155,9 +159,9 @@ namespace FE6318.TimeClockProgram.UI
             {
 
                 //clock out all users
-                for (int i = 0; lstUsers.Count > i; i++)
+                for (int i = 0; userList.Count > i; i++)
                 {
-                    lstUsers.ElementAt(i).clockOut();
+                    userList.ElementAt(i).clockOut();
                 }
             }
         }
