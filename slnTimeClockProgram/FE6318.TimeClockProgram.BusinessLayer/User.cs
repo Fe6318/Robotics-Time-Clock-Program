@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace FE6318.TimeClockProgram.BusinessLayer
 {
+   /*
+    * Keeps track of a user.
+    */
     public class User
     {
-        /*
-         * Keeps track of a user.
-         */ 
         private string firstName;
         public string FirstName { get => firstName; set => firstName = value; }
 
@@ -23,7 +24,25 @@ namespace FE6318.TimeClockProgram.BusinessLayer
         public string UserID { get => userID; set => userID = value; }
 
         private double loggedHours;
-        public double LoggedHours { get => loggedHours; set => loggedHours = value; }
+        public double LoggedHours
+        {
+            //calculate the logged hours using the log files
+            get
+            {
+                double lHours = 0;
+                for (int i = 0; File.ReadLines(logDirectory + @"\" + firstName + lastName + @"\out.6318").Count() > i; i++)
+                {
+
+                    DateTime cIn = DateTime.Parse(System.IO.File.ReadLines(logDirectory + @"\" + firstName + lastName + @"\in.6318").Skip(i).Take(1).First());
+                    DateTime cOut = DateTime.Parse(System.IO.File.ReadLines(logDirectory + @"\" + firstName + lastName + @"\out.6318").Skip(i).Take(1).First());
+
+                    TimeSpan tWorked = cOut.Subtract(cIn);
+                    lHours = lHours + tWorked.TotalHours;
+
+                }
+                return lHours;
+            }
+        }
 
         private bool isClockedIn;
         public bool IsClockedIn { get => isClockedIn; set => isClockedIn = value; }
@@ -35,20 +54,17 @@ namespace FE6318.TimeClockProgram.BusinessLayer
         public DateTime TimeClockedOut { get => timeClockedOut; set => timeClockedOut = value; }
 
         private string logDirectory;
-        public string LogDirectory { get => logDirectory; set => logDirectory = value; }
 
         private String userDirectory;
-        public string UserDirectory { get => userDirectory; set => userDirectory = value; }
         
 
-        public User(String userID, String firstName, String lastName, double loggedHours, String logDirectory, String userDirectory)
+        public User(String userID, String firstName, String lastName, double loggedHours)
         {
             UserID = userID;
             FirstName = firstName;
             LastName = lastName;
-            
-            LogDirectory = logDirectory;
-            UserDirectory = userDirectory;
+
+            logDirectory = Environment.CurrentDirectory + @"\Information\Log";
 
             //create a directory for the user
             System.IO.Directory.CreateDirectory(this.logDirectory + @"\" + firstName + lastName);
@@ -69,19 +85,7 @@ namespace FE6318.TimeClockProgram.BusinessLayer
                 isClockedIn = false;
             }
 
-            double lHours = 0;
-            //calculate the logged hours using the log files
-            for (int i = 0; System.IO.File.ReadLines(logDirectory + @"\" + firstName + lastName + @"\out.6318").Count() > i;i++)
-            {
-
-                DateTime cIn = DateTime.Parse(System.IO.File.ReadLines(logDirectory + @"\" + firstName + lastName + @"\in.6318").Skip(i).Take(1).First());
-                DateTime cOut = DateTime.Parse(System.IO.File.ReadLines(logDirectory + @"\" + firstName + lastName + @"\out.6318").Skip(i).Take(1).First());
-
-                TimeSpan tWorked = cOut.Subtract(cIn);
-                lHours = lHours + tWorked.TotalHours;
-
-            }
-            LoggedHours = lHours;
+            userDirectory = Environment.CurrentDirectory + @"\Information\Users\" + FirstName + LastName;
         }
 
         

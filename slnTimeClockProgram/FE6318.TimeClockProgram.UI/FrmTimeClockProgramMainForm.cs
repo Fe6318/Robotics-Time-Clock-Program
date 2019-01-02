@@ -70,18 +70,24 @@ namespace FE6318.TimeClockProgram.UI
 
         public void PrintUserInfo(User user)
         {
-            lblOutput.Text = "User: " + user.Name + Environment.NewLine +
-                             "Clocked in: " + user.getFormatedClockInTime() + Environment.NewLine +
-                             "Total hours: " + Math.Round(user.LoggedHours, 2).ToString();
+            
             if (!user.IsClockedIn)
             {
-                lblOutput.Text = lblOutput.Text + Environment.NewLine + "Hours this session: " + Math.Round(user.getNumberOfHoursElapsedBetweenClocks(),2);
+                lblOutput.Text = "User: " + user.Name + Environment.NewLine +
+                             "Clocked out: " + user.getFormatedClockInTime() + Environment.NewLine +
+                             "Total hours: " + Math.Round(user.LoggedHours, 2).ToString() + Environment.NewLine + 
+                             "Hours this session: " + Math.Round(user.getNumberOfHoursElapsedBetweenClocks(),2);
+            } else
+            {
+                lblOutput.Text = "User: " + user.Name + Environment.NewLine +
+                             "Clocked in: " + user.getFormatedClockInTime() + Environment.NewLine +
+                             "Total hours: " + Math.Round(user.LoggedHours, 2).ToString();
             }
         }
 
         public void AddNewUser(String userCode, String firstName, String lastName) 
         {
-            userList.Add(new User(userCode,firstName,lastName,0,strLOG_DIRECTORY,strUSER_DIRECTORY));
+            userList.Add(new User(userCode,firstName,lastName,0));
 
             //save this information to a text file
             using (System.IO.StreamWriter file =
@@ -128,15 +134,8 @@ namespace FE6318.TimeClockProgram.UI
                 //create a log directory for the user
                 System.IO.Directory.CreateDirectory(strLOG_DIRECTORY + @"\" + line2 + line3);
                 
-
-                //create the log files
-                using (System.IO.StreamWriter file =
-                new System.IO.StreamWriter(strLOG_DIRECTORY + @"\" + line2 + line3 + @"\in.6318",true)){}
-
-                using (System.IO.StreamWriter file =
-                new System.IO.StreamWriter(strLOG_DIRECTORY + @"\" + line2 + line3 + @"\out.6318", true)) { }
                 //add a new user with this information
-                userList.Add(new User(line1, line2, line3, double.Parse(line4), strLOG_DIRECTORY, strUSER_DIRECTORY));
+                userList.Add(new User(line1, line2, line3, double.Parse(line4)));
             }
             
         }
