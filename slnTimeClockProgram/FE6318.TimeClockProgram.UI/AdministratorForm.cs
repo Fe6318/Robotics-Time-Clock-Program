@@ -64,9 +64,7 @@ namespace FE6318.TimeClockProgram.UI
             arrLine[lbxIn.SelectedIndex] = dtpIn.Value.ToString();
             //write the array back to the file
             File.WriteAllLines(mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\in.6318", arrLine);
-
-            //update the logged hours
-            lstUser.ElementAt(cmbSelectedUser.SelectedIndex).updateHours();
+            
 
             updateListBoxes();
         }
@@ -86,9 +84,7 @@ namespace FE6318.TimeClockProgram.UI
             arrLine[lbxOut.SelectedIndex] = dtpOut.Value.ToString();
             //write the array back to the file
             File.WriteAllLines(mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\out.6318", arrLine);
-
-            //update the logged hours
-            lstUser.ElementAt(cmbSelectedUser.SelectedIndex).updateHours();
+            
 
             updateListBoxes();
         }
@@ -211,9 +207,7 @@ namespace FE6318.TimeClockProgram.UI
                 }
 
                 while (lstUser.Count() > i) {
-
-                    //update the users hours first
-                    lstUser.ElementAt(i).updateHours();
+                    
                     //draw the users name
                     e1.Graphics.DrawString(lstUser.ElementAt(i).Name, new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(20, y, p.DefaultPageSettings.PrintableArea.Width, 50));
                     //draw their total hours
@@ -267,9 +261,7 @@ namespace FE6318.TimeClockProgram.UI
             arrLine = lstLine.ToArray();
             //write the array back to the file
             File.WriteAllLines(strInDirectory, arrLine);
-
-            //update the logged hours
-            lstUser.ElementAt(cmbSelectedUser.SelectedIndex).updateHours();
+            
 
             updateListBoxes();
 
@@ -297,9 +289,7 @@ namespace FE6318.TimeClockProgram.UI
             arrLine = lstLine.ToArray();
             //write the array back to the file
             File.WriteAllLines(strOutDirectory, arrLine);
-
-            //update the logged hours
-            lstUser.ElementAt(cmbSelectedUser.SelectedIndex).updateHours();
+            
 
             updateListBoxes();
         }
@@ -326,9 +316,6 @@ namespace FE6318.TimeClockProgram.UI
             arrLine = lstLine.ToArray();
             //write the array back to the file
             File.WriteAllLines(strInDirectory, arrLine);
-
-            //update the logged hours
-            lstUser.ElementAt(cmbSelectedUser.SelectedIndex).updateHours();
 
             updateListBoxes();
         }
@@ -362,9 +349,6 @@ namespace FE6318.TimeClockProgram.UI
             arrLine = lstLine.ToArray();
             //write the array back to the file
             File.WriteAllLines(strOutDirectory, arrLine);
-
-            //update the logged hours
-            lstUser.ElementAt(cmbSelectedUser.SelectedIndex).updateHours();
 
             updateListBoxes();
         }

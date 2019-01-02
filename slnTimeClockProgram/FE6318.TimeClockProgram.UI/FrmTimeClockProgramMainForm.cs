@@ -53,12 +53,10 @@ namespace FE6318.TimeClockProgram.UI
             {
                 
                 curUser.clockOut();
-                curUser.updateHours();
                 PrintUserInfo(curUser);
             }
             else
             {
-                curUser.updateHours();
                 curUser.clockIn();
                 PrintUserInfo(curUser);
 
@@ -87,7 +85,7 @@ namespace FE6318.TimeClockProgram.UI
 
         public void AddNewUser(String userCode, String firstName, String lastName) 
         {
-            userList.Add(new User(userCode,firstName,lastName,0));
+            userList.Add(new User(userCode,firstName,lastName));
 
             //save this information to a text file
             using (System.IO.StreamWriter file =
@@ -135,7 +133,7 @@ namespace FE6318.TimeClockProgram.UI
                 System.IO.Directory.CreateDirectory(strLOG_DIRECTORY + @"\" + line2 + line3);
                 
                 //add a new user with this information
-                userList.Add(new User(line1, line2, line3, double.Parse(line4)));
+                userList.Add(new User(line1, line2, line3));
             }
             
         }

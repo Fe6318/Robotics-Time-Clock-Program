@@ -22,8 +22,7 @@ namespace FE6318.TimeClockProgram.BusinessLayer
 
         private string userID;
         public string UserID { get => userID; set => userID = value; }
-
-        private double loggedHours;
+        
         public double LoggedHours
         {
             //calculate the logged hours using the log files
@@ -58,7 +57,7 @@ namespace FE6318.TimeClockProgram.BusinessLayer
         private String userDirectory;
         
 
-        public User(String userID, String firstName, String lastName, double loggedHours)
+        public User(String userID, String firstName, String lastName)
         {
             UserID = userID;
             FirstName = firstName;
@@ -178,21 +177,7 @@ namespace FE6318.TimeClockProgram.BusinessLayer
             }
         }
 
-        public void updateHours()
-        {
-            double lHours = 0;
-            for (int i = 0; System.IO.File.ReadLines(logDirectory + @"\" + firstName + lastName + @"\out.6318").Count() > i; i++)
-            {
-
-                DateTime cIn = DateTime.Parse(System.IO.File.ReadLines(logDirectory + @"\" + firstName + lastName + @"\in.6318").Skip(i).Take(1).First());
-                DateTime cOut = DateTime.Parse(System.IO.File.ReadLines(logDirectory + @"\" + firstName + lastName + @"\out.6318").Skip(i).Take(1).First());
-
-                TimeSpan tWorked = cOut.Subtract(cIn);
-                lHours += tWorked.TotalHours;
-
-            }
-            loggedHours = lHours;
-        }
+        
 
         private void saveHours(DateTime cIn, DateTime cOut)
         {
@@ -208,8 +193,7 @@ namespace FE6318.TimeClockProgram.BusinessLayer
                 file.WriteLine(firstName);
                 file.WriteLine(lastName);
                 //now we finally can write the number of hours worked
-                file.WriteLine((getNumberOfHoursElapsedBetweenClocks() + loggedHours).ToString());
-                loggedHours = loggedHours + getNumberOfHoursElapsedBetweenClocks(); //update the logged hours
+                file.WriteLine((LoggedHours).ToString());
             }
         }
     }
