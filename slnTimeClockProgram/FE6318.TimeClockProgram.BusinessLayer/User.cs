@@ -18,7 +18,7 @@ namespace FE6318.TimeClockProgram.BusinessLayer
         private string lastName;
         public string LastName { get => lastName; set => lastName = value; }
 
-        public string Name { get => FirstName + LastName; }
+        public string Name { get => FirstName + " " + LastName; }
 
         private string userID;
         public string UserID { get => userID; set => userID = value; }

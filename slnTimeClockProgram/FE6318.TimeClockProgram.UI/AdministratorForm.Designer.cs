@@ -50,27 +50,29 @@
             this.lbxIn.FormattingEnabled = true;
             this.lbxIn.ItemHeight = 16;
             this.lbxIn.Location = new System.Drawing.Point(76, 350);
-            this.lbxIn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbxIn.Margin = new System.Windows.Forms.Padding(4);
             this.lbxIn.Name = "lbxIn";
             this.lbxIn.Size = new System.Drawing.Size(225, 228);
             this.lbxIn.TabIndex = 6;
+            this.lbxIn.SelectedIndexChanged += new System.EventHandler(this.lbxIn_SelectedIndexChanged);
             // 
             // lbxOut
             // 
             this.lbxOut.FormattingEnabled = true;
             this.lbxOut.ItemHeight = 16;
             this.lbxOut.Location = new System.Drawing.Point(511, 350);
-            this.lbxOut.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbxOut.Margin = new System.Windows.Forms.Padding(4);
             this.lbxOut.Name = "lbxOut";
             this.lbxOut.Size = new System.Drawing.Size(225, 228);
             this.lbxOut.TabIndex = 8;
+            this.lbxOut.SelectedIndexChanged += new System.EventHandler(this.lbxOut_SelectedIndexChanged);
             // 
             // dtpIn
             // 
             this.dtpIn.CustomFormat = "MM\'/\'dd\'/\'yyyy hh\':\'mm tt";
             this.dtpIn.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpIn.Location = new System.Drawing.Point(55, 140);
-            this.dtpIn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpIn.Margin = new System.Windows.Forms.Padding(4);
             this.dtpIn.Name = "dtpIn";
             this.dtpIn.Size = new System.Drawing.Size(265, 22);
             this.dtpIn.TabIndex = 1;
@@ -80,7 +82,7 @@
             this.dtpOut.CustomFormat = "MM\'/\'dd\'/\'yyyy hh\':\'mm tt";
             this.dtpOut.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpOut.Location = new System.Drawing.Point(483, 140);
-            this.dtpOut.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpOut.Margin = new System.Windows.Forms.Padding(4);
             this.dtpOut.Name = "dtpOut";
             this.dtpOut.Size = new System.Drawing.Size(265, 22);
             this.dtpOut.TabIndex = 3;
@@ -90,7 +92,7 @@
             this.cmbSelectedUser.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSelectedUser.FormattingEnabled = true;
             this.cmbSelectedUser.Location = new System.Drawing.Point(315, 70);
-            this.cmbSelectedUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbSelectedUser.Margin = new System.Windows.Forms.Padding(4);
             this.cmbSelectedUser.Name = "cmbSelectedUser";
             this.cmbSelectedUser.Size = new System.Drawing.Size(160, 24);
             this.cmbSelectedUser.TabIndex = 0;
@@ -99,7 +101,7 @@
             // btnModifyIn
             // 
             this.btnModifyIn.Location = new System.Drawing.Point(131, 197);
-            this.btnModifyIn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnModifyIn.Margin = new System.Windows.Forms.Padding(4);
             this.btnModifyIn.Name = "btnModifyIn";
             this.btnModifyIn.Size = new System.Drawing.Size(100, 28);
             this.btnModifyIn.TabIndex = 2;
@@ -110,7 +112,7 @@
             // btnModifyOut
             // 
             this.btnModifyOut.Location = new System.Drawing.Point(569, 197);
-            this.btnModifyOut.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnModifyOut.Margin = new System.Windows.Forms.Padding(4);
             this.btnModifyOut.Name = "btnModifyOut";
             this.btnModifyOut.Size = new System.Drawing.Size(100, 28);
             this.btnModifyOut.TabIndex = 4;
@@ -141,7 +143,7 @@
             // btnPrintCurUser
             // 
             this.btnPrintCurUser.Location = new System.Drawing.Point(339, 594);
-            this.btnPrintCurUser.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPrintCurUser.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintCurUser.Name = "btnPrintCurUser";
             this.btnPrintCurUser.Size = new System.Drawing.Size(137, 28);
             this.btnPrintCurUser.TabIndex = 9;
@@ -152,7 +154,7 @@
             // btnPrintAllUsersHours
             // 
             this.btnPrintAllUsersHours.Location = new System.Drawing.Point(332, 651);
-            this.btnPrintAllUsersHours.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPrintAllUsersHours.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintAllUsersHours.Name = "btnPrintAllUsersHours";
             this.btnPrintAllUsersHours.Size = new System.Drawing.Size(155, 28);
             this.btnPrintAllUsersHours.TabIndex = 10;
@@ -220,7 +222,7 @@
             this.Controls.Add(this.dtpIn);
             this.Controls.Add(this.lbxOut);
             this.Controls.Add(this.lbxIn);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AdministratorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Admin Form";

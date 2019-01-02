@@ -16,14 +16,14 @@ namespace FE6318.TimeClockProgram.UI
     public partial class AdministratorForm : Form
     {
 
-        List<User> lstUser;
+        UserList userList;
         FrmTimeClockProgramMainForm mainForm;
         
         public AdministratorForm(FrmTimeClockProgramMainForm mainForm)
         {
             InitializeComponent();
             this.mainForm = mainForm;
-            lstUser = mainForm.userList;
+            userList = mainForm.userList;
         }
 
         private void AdministratorForm_Load(object sender, EventArgs e)
@@ -31,12 +31,14 @@ namespace FE6318.TimeClockProgram.UI
             //add each user's name into the drop down box
             for (int i = 0; mainForm.userList.Count > i; i++)
             {
-                cmbSelectedUser.Items.Add(lstUser.ElementAt(i).Name);
+                cmbSelectedUser.Items.Add(userList.ElementAt(i).Name);
             }
 
             //changing the index will cause it to update and have it load each list box
-            //cmbSelectedUser.SelectedIndex = 0;
-
+            if (cmbSelectedUser.Items.Count > 0)
+            {
+                cmbSelectedUser.SelectedIndex = 0;
+            }
         }
 
         private void cmbSelectedUser_SelectedIndexChanged(object sender, EventArgs e)
@@ -47,6 +49,8 @@ namespace FE6318.TimeClockProgram.UI
 
             //update the list boxes
             updateListBoxes();
+
+            
         }
 
         private void btnModifyIn_Click(object sender, EventArgs e)
@@ -59,11 +63,11 @@ namespace FE6318.TimeClockProgram.UI
             }
 
             //read the file into an array
-            string[] arrLine = File.ReadAllLines(mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\in.6318");
+            string[] arrLine = File.ReadAllLines(mainForm.strLOG_DIRECTORY + @"\" + userList.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + userList.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\in.6318");
             //change the selected value in the array
             arrLine[lbxIn.SelectedIndex] = dtpIn.Value.ToString();
             //write the array back to the file
-            File.WriteAllLines(mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\in.6318", arrLine);
+            File.WriteAllLines(mainForm.strLOG_DIRECTORY + @"\" + userList.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + userList.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\in.6318", arrLine);
             
 
             updateListBoxes();
@@ -79,11 +83,11 @@ namespace FE6318.TimeClockProgram.UI
             }
 
             //read the file into the array
-            string[] arrLine = File.ReadAllLines(mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\out.6318");
+            string[] arrLine = File.ReadAllLines(mainForm.strLOG_DIRECTORY + @"\" + userList.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + userList.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\out.6318");
             //change the selected value in the array
             arrLine[lbxOut.SelectedIndex] = dtpOut.Value.ToString();
             //write the array back to the file
-            File.WriteAllLines(mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\out.6318", arrLine);
+            File.WriteAllLines(mainForm.strLOG_DIRECTORY + @"\" + userList.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + userList.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\out.6318", arrLine);
             
 
             updateListBoxes();
@@ -97,28 +101,38 @@ namespace FE6318.TimeClockProgram.UI
 
 
             //read all the datetime's back in and put them in the list boxes
-            for (int i = 0; System.IO.File.ReadLines(mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\out.6318").Count() > i; i++)
+            for (int i = 0; System.IO.File.ReadLines(mainForm.strLOG_DIRECTORY + @"\" + userList.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + userList.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\out.6318").Count() > i; i++)
             {
-                lbxOut.Items.Add(DateTime.Parse(System.IO.File.ReadLines(mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\out.6318").Skip(i).Take(1).First()));
+                lbxOut.Items.Add(DateTime.Parse(System.IO.File.ReadLines(mainForm.strLOG_DIRECTORY + @"\" + userList.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + userList.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\out.6318").Skip(i).Take(1).First()));
             }
             
-            for (int i = 0; System.IO.File.ReadLines(mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\in.6318").Count() > i; i++)
+            for (int i = 0; System.IO.File.ReadLines(mainForm.strLOG_DIRECTORY + @"\" + userList.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + userList.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\in.6318").Count() > i; i++)
             {
-                lbxIn.Items.Add(DateTime.Parse(System.IO.File.ReadLines(mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\in.6318").Skip(i).Take(1).First()));
+                lbxIn.Items.Add(DateTime.Parse(System.IO.File.ReadLines(mainForm.strLOG_DIRECTORY + @"\" + userList.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + userList.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\in.6318").Skip(i).Take(1).First()));
+            }
+
+            if(lbxIn.Items.Count > 0)
+            {
+                lbxIn.SelectedIndex = 0;
+            }
+
+            if (lbxOut.Items.Count > 0)
+            {
+                lbxOut.SelectedIndex = 0;
             }
         }
         private void printCurrentUser()
         {
             PrintPreviewDialog printPreviewDialog1 = new PrintPreviewDialog();
             PrintDocument p = new PrintDocument();
-            String strUSER_IN_DIR = mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\in.6318";
-            String strUSER_OUT_DIR = mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\out.6318";
+            String strUSER_IN_DIR = mainForm.strLOG_DIRECTORY + @"\" + userList.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + userList.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\in.6318";
+            String strUSER_OUT_DIR = mainForm.strLOG_DIRECTORY + @"\" + userList.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + userList.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\out.6318";
 
             int y = 70; //y value on the page
             int itemsPerPage = 0; //items per page
             int i = 0; //which line we're on
             bool isFirstPage = true; //wether we are on the first page or not
-            int offset = 25;
+            int offset = 10;
             p.PrintPage += delegate (object sender1, PrintPageEventArgs e1)
                 {
                     //Reset the variables
@@ -135,7 +149,7 @@ namespace FE6318.TimeClockProgram.UI
                     if (isFirstPage)
                     {
                         //if it's the first page draw the name, and the in and out lower
-                        e1.Graphics.DrawString(lstUser.ElementAt(cmbSelectedUser.SelectedIndex).Name, new Font("Times New Roman", 16), new SolidBrush(Color.Black), new RectangleF(350 - offset, 10, p.DefaultPageSettings.PrintableArea.Width, 50));
+                        e1.Graphics.DrawString(userList.ElementAt(cmbSelectedUser.SelectedIndex).Name, new Font("Times New Roman", 16), new SolidBrush(Color.Black), new RectangleF(380 - offset, 10, p.DefaultPageSettings.PrintableArea.Width, 50));
                         e1.Graphics.DrawString("In", new Font("Times New Roman", 14), new SolidBrush(Color.Black), new RectangleF(90 - offset, 30, 30, 20));
                         e1.Graphics.DrawString("Out", new Font("Times New Roman", 14), new SolidBrush(Color.Black), new RectangleF(755 - offset, 30, 50, 20));
                     } else
@@ -166,7 +180,7 @@ namespace FE6318.TimeClockProgram.UI
                             e1.HasMorePages = true; //we need another page
                             y = 50; //reset the y to 50
                             itemsPerPage = 0; //now their is none on the page
-                            isFirstPage = false; //it's not the firts page
+                            isFirstPage = false; //it's not the first page
                             return; //we have to return, so the printpreview will call this again.
                         }
                         i++;
@@ -206,12 +220,12 @@ namespace FE6318.TimeClockProgram.UI
                     i = 0;
                 }
 
-                while (lstUser.Count() > i) {
+                while (userList.Count() > i) {
                     
                     //draw the users name
-                    e1.Graphics.DrawString(lstUser.ElementAt(i).Name, new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(20, y, p.DefaultPageSettings.PrintableArea.Width, 50));
+                    e1.Graphics.DrawString(userList.ElementAt(i).Name, new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(20, y, p.DefaultPageSettings.PrintableArea.Width, 50));
                     //draw their total hours
-                    e1.Graphics.DrawString(Math.Round(lstUser.ElementAt(i).LoggedHours,2).ToString(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(750, y, p.DefaultPageSettings.PrintableArea.Width, 50));
+                    e1.Graphics.DrawString(Math.Round(userList.ElementAt(i).LoggedHours,2).ToString(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(750, y, p.DefaultPageSettings.PrintableArea.Width, 50));
 
                     if (itemsPerPage < 35)
                     {
@@ -229,8 +243,9 @@ namespace FE6318.TimeClockProgram.UI
                 }
             };
 
-                //set the document to the one we just created
-                printPreviewDialog1.Document = p;
+            //set the document to the one we just created
+            printPreviewDialog1.Document = p;
+
             //set up the print preview
             printPreviewDialog1.Width = 1367;
             printPreviewDialog1.Height = 768;
@@ -241,7 +256,7 @@ namespace FE6318.TimeClockProgram.UI
 
         private void btnDeleteIn_Click(object sender, EventArgs e)
         {
-            String strInDirectory = mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\in.6318";
+            String strInDirectory = mainForm.strLOG_DIRECTORY + @"\" + userList.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + userList.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\in.6318";
 
             //check if no value is selected
             if (lbxIn.SelectedIndex == -1)
@@ -269,12 +284,12 @@ namespace FE6318.TimeClockProgram.UI
 
         private void btnDeleteOut_Click(object sender, EventArgs e)
         {
-            String strOutDirectory = mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\out.6318";
+            String strOutDirectory = mainForm.strLOG_DIRECTORY + @"\" + userList.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + userList.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\out.6318";
 
             //check if no value is selected
             if (lbxOut.SelectedIndex == -1)
             {
-                MessageBox.Show("No value is selected", "Error", 0, MessageBoxIcon.Error);
+                MessageBox.Show("No value is selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -296,7 +311,7 @@ namespace FE6318.TimeClockProgram.UI
 
         private void btnAddIn_Click(object sender, EventArgs e)
         {
-            String strInDirectory = mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\in.6318";
+            String strInDirectory = mainForm.strLOG_DIRECTORY + @"\" + userList.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + userList.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\in.6318";
             int intSelectedIndex = lbxIn.SelectedIndex;
 
             //read the file into an array
@@ -322,7 +337,7 @@ namespace FE6318.TimeClockProgram.UI
 
         private void btnAddOut_Click(object sender, EventArgs e)
         {
-            String strOutDirectory = mainForm.strLOG_DIRECTORY + @"\" + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + lstUser.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\out.6318";
+            String strOutDirectory = mainForm.strLOG_DIRECTORY + @"\" + userList.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + userList.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\out.6318";
             int intSelectedIndex = lbxIn.SelectedIndex;
 
             if(lbxOut.Items.Count + 1 > lbxIn.Items.Count)
@@ -351,6 +366,16 @@ namespace FE6318.TimeClockProgram.UI
             File.WriteAllLines(strOutDirectory, arrLine);
 
             updateListBoxes();
+        }
+
+        private void lbxIn_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dtpIn.Value = (DateTime)lbxIn.Items[lbxIn.SelectedIndex];
+        }
+
+        private void lbxOut_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dtpOut.Value = (DateTime)lbxOut.Items[lbxOut.SelectedIndex];
         }
     }
 }
