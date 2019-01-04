@@ -11,13 +11,14 @@ namespace FE6318.TimeClockProgram.BusinessLayer
     {
         public void Save()
         {
-            XML xml = new XML(Environment.CurrentDirectory + @"\Information\userlist.6318");
+            XML xml = new XML(Environment.CurrentDirectory + @"\Information\UserList.6318");
             xml.SerializeList<User>((List<User>)this);
         }
 
         public void Read()
         {
-            XML xml = new XML(Environment.CurrentDirectory + @"\Information\userlist.6318");
+            this.Clear();
+            XML xml = new XML(Environment.CurrentDirectory + @"\Information\UserList.6318");
             List<User> lst;
             lst = xml.DeserializeList<User>();
             foreach(User usr in lst)
