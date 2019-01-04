@@ -49,11 +49,11 @@ namespace FE6318.TimeClockProgram.BusinessLayer
         private bool isClockedIn;
         public bool IsClockedIn { get => isClockedIn; set => isClockedIn = value; }
 
-        private DateTime timeClockedIn;
-        public DateTime TimeClockedIn { get => timeClockedIn; set => timeClockedIn = value; }
+        private List<DateTime> timeClockedIn;
+        public List<DateTime> TimeClockedIn { get => timeClockedIn; set => timeClockedIn = value; }
 
-        private DateTime timeClockedOut;
-        public DateTime TimeClockedOut { get => timeClockedOut; set => timeClockedOut = value; }
+        private List<DateTime> timeClockedOut;
+        public List<DateTime> TimeClockedOut { get => timeClockedOut; set => timeClockedOut = value; }
         
 
         public User(String userID, String firstName, String lastName)
@@ -72,20 +72,20 @@ namespace FE6318.TimeClockProgram.BusinessLayer
             {
                 return false;
             }
-            timeClockedIn = DateTime.Now;
+            timeClockedIn.Add(DateTime.Now);
             isClockedIn = true;
             return true;
         }
 
         public double getNumberOfHoursElapsedBetweenClocks()
         {
-            TimeSpan tsTimeWorked = timeClockedOut.Subtract(timeClockedIn);
+            TimeSpan tsTimeWorked = timeClockedOut[timeClockedOut.Count - 1].Subtract(timeClockedIn[timeClockedIn.Count - 1]);
             return tsTimeWorked.TotalHours;
         }
 
         public String getFormatedClockInTime()
         {
-            return timeClockedIn.ToShortDateString() + " " + timeClockedIn.ToLongTimeString();
+            return timeClockedIn[timeClockedIn.Count - 1].ToShortDateString() + " " + timeClockedIn[timeClockedIn.Count - 1].ToLongTimeString();
         }
 
         public bool clockOut()
@@ -95,14 +95,14 @@ namespace FE6318.TimeClockProgram.BusinessLayer
                 return false;
             }
 
-            timeClockedOut = DateTime.Now;
+            timeClockedOut.Add(DateTime.Now);
             isClockedIn = false;
             return true;
         }
 
         public String getFormatedClockOutTime()
         {
-            return timeClockedOut.ToShortDateString() + " " + timeClockedOut.ToLongTimeString();
+            return timeClockedOut[timeClockedOut.Count - 1].ToShortDateString() + " " + timeClockedOut[timeClockedOut.Count - 1].ToLongTimeString();
         }
 
         public void clock()
@@ -110,11 +110,11 @@ namespace FE6318.TimeClockProgram.BusinessLayer
             //if clocked out, clock in
             if(isClockedIn)
             {
-                timeClockedOut = DateTime.Now;
+                timeClockedOut.Add(DateTime.Now);
                 isClockedIn = false;
             } else
             {
-                timeClockedIn = DateTime.Now;
+                timeClockedIn.Add(DateTime.Now);
                 isClockedIn = true;
             }
         }
