@@ -23,24 +23,15 @@ namespace FE6318.TimeClockProgram.BusinessLayer
         private string userID;
         public string UserID { get => userID; set => userID = value; }
         
-        /// <summary>
-        /// TODO: Fix
-        /// </summary>
         public double LoggedHours
         {
             //calculate the logged hours using the log files
             get
             {
                 double lHours = 0;
-                for (int i = 0; File.ReadLines(logDirectory + @"\" + firstName + lastName + @"\out.6318").Count() > i; i++)
+                for(int i = 0; i < timeClockedIn.Count; i++)
                 {
-
-                    DateTime cIn = DateTime.Parse(System.IO.File.ReadLines(logDirectory + @"\" + firstName + lastName + @"\in.6318").Skip(i).Take(1).First());
-                    DateTime cOut = DateTime.Parse(System.IO.File.ReadLines(logDirectory + @"\" + firstName + lastName + @"\out.6318").Skip(i).Take(1).First());
-
-                    TimeSpan tWorked = cOut.Subtract(cIn);
-                    lHours = lHours + tWorked.TotalHours;
-
+                    lHours += timeClockedOut[i].Subtract(timeClockedIn[i]).Hours;
                 }
                 return lHours;
             }
