@@ -47,6 +47,11 @@ namespace FE6318.TimeClockProgram.DataLayer
 
         public List<T> DeserializeList<T>()
         {
+            if(File.ReadAllText(path) == null)
+            {
+                return new List<T>();
+            }
+
             XmlSerializer ser = new XmlSerializer(typeof(List<T>));
 
             FileStream fs = new FileStream(path, FileMode.Open);
