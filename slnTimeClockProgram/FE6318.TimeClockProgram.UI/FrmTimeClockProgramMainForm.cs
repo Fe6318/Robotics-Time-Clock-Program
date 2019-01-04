@@ -63,6 +63,8 @@ namespace FE6318.TimeClockProgram.UI
             }
             txtUserCode.Focus();
             txtUserCode.SelectAll();
+
+            userList.Save();
                 
         }
 
@@ -86,56 +88,13 @@ namespace FE6318.TimeClockProgram.UI
         public void AddNewUser(String userCode, String firstName, String lastName) 
         {
             userList.Add(new User(userCode,firstName,lastName));
-
-            //save this information to a text file
-            using (System.IO.StreamWriter file =
-                new System.IO.StreamWriter(strUSER_DIRECTORY + @"\" + firstName + lastName + ".6318",false))
-            {
-                file.WriteLine(userCode);
-                file.WriteLine(firstName);
-                file.WriteLine(lastName);
-                file.WriteLine("0");
-            }
-
-            //create a log directory for the user
-            System.IO.Directory.CreateDirectory(strLOG_DIRECTORY + @"\" + firstName + lastName);
+            userList.Save();
+            
         }
 
         private void FrmTimeClockProgramMainForm_Load(object sender, EventArgs e)
         {
-            //create a directory for all of the stored information on users
-            System.IO.Directory.CreateDirectory(strINSTALL_DIRECTORY + @"\Information");
-            strINFORMATION_DIRECTORY = strINSTALL_DIRECTORY + @"\Information";
-
-            //create a directory for all user information
-            System.IO.Directory.CreateDirectory(strINFORMATION_DIRECTORY + @"\Users");
-            strUSER_DIRECTORY = strINFORMATION_DIRECTORY + @"\Users";
-
-            //create a directory for logs
-            System.IO.Directory.CreateDirectory(strINFORMATION_DIRECTORY + @"\Log");
-            strLOG_DIRECTORY = strINFORMATION_DIRECTORY + @"\Log";
-
-            String[] strAllUserFiles;
-            //store all of the files in the user directory to strAllUserFiles
-            strAllUserFiles = System.IO.Directory.GetFiles(strUSER_DIRECTORY);
-
-            //use this to load in all of the current users
-            for (int i = 0; strAllUserFiles.GetLength(0) > i; i++)
-            {
-                //read all the relevent lines of the file
-                
-                string line1 = System.IO.File.ReadLines(strAllUserFiles[i]).Skip(0).Take(1).First();
-                string line2 = System.IO.File.ReadLines(strAllUserFiles[i]).Skip(1).Take(1).First();
-                string line3 = System.IO.File.ReadLines(strAllUserFiles[i]).Skip(2).Take(1).First();
-                string line4 = System.IO.File.ReadLines(strAllUserFiles[i]).Skip(3).Take(1).First();
-
-                //create a log directory for the user
-                System.IO.Directory.CreateDirectory(strLOG_DIRECTORY + @"\" + line2 + line3);
-                
-                //add a new user with this information
-                userList.Add(new User(line1, line2, line3));
-            }
-            
+            userList.Read();   
         }
 
         //when the form closes we want to clock out all the users so no hour counting errors will occur
@@ -186,7 +145,7 @@ namespace FE6318.TimeClockProgram.UI
 
         private void label3_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/hmumm/Robotics-Time-Clock-Program");
+            System.Diagnostics.Process.Start("https://github.com/fe6318/Robotics-Time-Clock-Program");
         }
     }
 }

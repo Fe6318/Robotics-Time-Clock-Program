@@ -16,11 +16,22 @@ namespace FE6318.TimeClockProgram.DataLayer
         public string Path
         {
             get { return path; }
-            set { path = value; }
+            set
+            {
+                if(!File.Exists(value))
+                {
+                    File.Create(value);
+                }
+                path = value;
+            }
         }
 
         public XML(string path) 
         {
+            if (!File.Exists(path))
+            {
+                File.Create(path);
+            }
             this.path = path;
         }
 

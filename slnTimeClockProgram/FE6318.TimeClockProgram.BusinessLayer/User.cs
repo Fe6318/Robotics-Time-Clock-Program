@@ -29,7 +29,7 @@ namespace FE6318.TimeClockProgram.BusinessLayer
             get
             {
                 double lHours = 0;
-                for(int i = 0; i < timeClockedIn.Count; i++)
+                for(int i = 0; i < timeClockedOut.Count; i++)
                 {
                     lHours += timeClockedOut[i].Subtract(timeClockedIn[i]).Hours;
                 }
@@ -52,10 +52,10 @@ namespace FE6318.TimeClockProgram.BusinessLayer
             UserID = userID;
             FirstName = firstName;
             LastName = lastName;
-
             
         }
 
+        public User() { }
         
         public bool clockIn()
         {
