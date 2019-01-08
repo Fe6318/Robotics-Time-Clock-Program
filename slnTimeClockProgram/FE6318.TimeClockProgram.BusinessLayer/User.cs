@@ -52,10 +52,15 @@ namespace FE6318.TimeClockProgram.BusinessLayer
             UserID = userID;
             FirstName = firstName;
             LastName = lastName;
-            
+            timeClockedIn = new List<DateTime>();
+            timeClockedOut = new List<DateTime>();
         }
 
-        public User() { }
+        public User()
+        {
+            timeClockedIn = new List<DateTime>();
+            timeClockedOut = new List<DateTime>();
+        }
         
         public bool clockIn()
         {

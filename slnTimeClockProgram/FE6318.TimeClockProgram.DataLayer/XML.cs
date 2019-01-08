@@ -18,20 +18,12 @@ namespace FE6318.TimeClockProgram.DataLayer
             get { return path; }
             set
             {
-                if(!File.Exists(value))
-                {
-                    File.Create(value);
-                }
                 path = value;
             }
         }
 
         public XML(string path) 
         {
-            if (!File.Exists(path))
-            {
-                File.Create(path);
-            }
             this.path = path;
         }
 
@@ -47,9 +39,10 @@ namespace FE6318.TimeClockProgram.DataLayer
 
         public List<T> DeserializeList<T>()
         {
-            if(File.ReadAllText(path) == null)
+
+            if (!File.Exists(path))
             {
-                return new List<T>();
+                SerializeList<T>(new List<T>());
             }
 
             XmlSerializer ser = new XmlSerializer(typeof(List<T>));
