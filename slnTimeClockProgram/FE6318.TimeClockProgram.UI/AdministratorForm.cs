@@ -64,7 +64,7 @@ namespace FE6318.TimeClockProgram.UI
                 return;
             }
 
-            selectedUser.TimeClockedIn[lbxIn.SelectedIndex] = DateTime.Parse(lbxIn.Items[lbxIn.SelectedIndex].ToString());
+            selectedUser.TimeClockedIn[lbxIn.SelectedIndex] = dtpIn.Value;
 
             userList.Save();
             updateListBoxes();
@@ -81,7 +81,7 @@ namespace FE6318.TimeClockProgram.UI
                 return;
             }
 
-            selectedUser.TimeClockedOut[lbxOut.SelectedIndex] = DateTime.Parse(lbxOut.Items[lbxOut.SelectedIndex].ToString());
+            selectedUser.TimeClockedOut[lbxOut.SelectedIndex] = dtpOut.Value;
 
             userList.Save();
             updateListBoxes();
