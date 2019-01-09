@@ -120,8 +120,7 @@ namespace FE6318.TimeClockProgram.UI
         {
             PrintPreviewDialog printPreviewDialog1 = new PrintPreviewDialog();
             PrintDocument p = new PrintDocument();
-            String strUSER_IN_DIR = mainForm.strLOG_DIRECTORY + @"\" + userList.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + userList.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\in.6318";
-            String strUSER_OUT_DIR = mainForm.strLOG_DIRECTORY + @"\" + userList.ElementAt(cmbSelectedUser.SelectedIndex).FirstName + userList.ElementAt(cmbSelectedUser.SelectedIndex).LastName + @"\out.6318";
+            User selectedUser = userList[cmbSelectedUser.SelectedIndex];
 
             int y = 70; //y value on the page
             int itemsPerPage = 0; //items per page
@@ -156,11 +155,11 @@ namespace FE6318.TimeClockProgram.UI
                     }
 
 
-                    while (System.IO.File.ReadLines(strUSER_OUT_DIR).Count() > i)
+                    while (selectedUser.TimeClockedOut.Count > i)
                     {
                         //write the datetime's
-                        e1.Graphics.DrawString(System.IO.File.ReadLines(strUSER_IN_DIR).Skip(i).Take(1).First(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(30 - offset, y, 175, 20));
-                        e1.Graphics.DrawString(System.IO.File.ReadLines(strUSER_OUT_DIR).Skip(i).Take(1).First(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(675 - offset, y, 175, 20));
+                        e1.Graphics.DrawString(selectedUser.TimeClockedIn[i].ToString(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(30 - offset, y, 175, 20));
+                        e1.Graphics.DrawString(selectedUser.TimeClockedOut[i].ToString(), new Font("Times New Roman", 12), new SolidBrush(Color.Black), new RectangleF(675 - offset, y, 175, 20));
 
                         //if we can still fit more
                         if (itemsPerPage < 33)
@@ -174,7 +173,7 @@ namespace FE6318.TimeClockProgram.UI
                             //if we can't fit anymore
                             e1.HasMorePages = true; //we need another page
                             y = 50; //reset the y to 50
-                            itemsPerPage = 0; //now their is none on the page
+                            itemsPerPage = 0; //now there is none on the page
                             isFirstPage = false; //it's not the first page
                             return; //we have to return, so the printpreview will call this again.
                         }
@@ -278,7 +277,7 @@ namespace FE6318.TimeClockProgram.UI
                 return;
             }
 
-            selectedUser.TimeClockedIn.RemoveAt(lbxIn.SelectedIndex);
+            selectedUser.TimeClockedOut.RemoveAt(lbxIn.SelectedIndex);
 
             userList.Save();
             updateListBoxes();
