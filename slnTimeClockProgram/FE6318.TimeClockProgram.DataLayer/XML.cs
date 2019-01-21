@@ -42,7 +42,7 @@ namespace FE6318.TimeClockProgram.DataLayer
         public XML() { }
 
         /// <summary>
-        /// Saves of List of type <typeparamref name="T"/>
+        /// Saves List of type <typeparamref name="T"/>
         /// </summary>
         /// <typeparam name="T">Type that the list will be</typeparam>
         /// <param name="list">List of things to save</param>
