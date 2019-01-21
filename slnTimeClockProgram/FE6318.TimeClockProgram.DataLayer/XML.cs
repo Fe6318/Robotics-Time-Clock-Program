@@ -61,7 +61,7 @@ namespace FE6318.TimeClockProgram.DataLayer
         /// <returns>The List that is read from</returns>
         public List<T> DeserializeList<T>()
         {
-
+            // If the file doesn't exist serialize a blank list, so it won't crash
             if (!File.Exists(path))
             {
                 SerializeList<T>(new List<T>());

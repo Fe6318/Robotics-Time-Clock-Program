@@ -26,10 +26,13 @@ namespace FE6318.TimeClockProgram.BusinessLayer
         /// </summary>
         public void Read()
         {
+            // Delete everything currently in the list
             this.Clear();
+            // Set the path to the information directory
             XML xml = new XML(Environment.CurrentDirectory + @"\Information\UserList.6318");
             List<User> lst;
             lst = xml.DeserializeList<User>();
+            // Add all the users read into this list
             foreach(User usr in lst)
             {
                 this.Add(usr);
