@@ -7,110 +7,133 @@ using System.IO;
 
 namespace FE6318.TimeClockProgram.BusinessLayer
 {
-   /*
-    * Keeps track of a user.
-    */
+    /// <summary>
+    /// Keep tracks of a User
+    /// Contains all methods relating to a User
+    /// </summary>
     public class User
     {
         private string firstName;
+        /// <value>
+        /// Gets or sets the users first name
+        /// </value>
         public string FirstName { get => firstName; set => firstName = value; }
 
         private string lastName;
+        /// <value>
+        /// Gets or sets the users last name
+        /// </value>
         public string LastName { get => lastName; set => lastName = value; }
 
+        /// <value>
+        /// Returns the user's formatted name
+        /// </value>
         public string Name { get => FirstName + " " + LastName; }
 
         private string userID;
+        /// <value>
+        /// Gets or sets the User's UserID
+        /// </value>
         public string UserID { get => userID; set => userID = value; }
         
+        /// <value>
+        /// Gets the number of hours a user has been clocked in
+        /// </value>
         public double LoggedHours
         {
             //calculate the logged hours using the log files
             get
             {
                 double lHours = 0;
-                for (int i = 0; File.ReadLines(logDirectory + @"\" + firstName + lastName + @"\out.6318").Count() > i; i++)
+                for(int i = 0; i < timeClockedOut.Count; i++)
                 {
-
-                    DateTime cIn = DateTime.Parse(System.IO.File.ReadLines(logDirectory + @"\" + firstName + lastName + @"\in.6318").Skip(i).Take(1).First());
-                    DateTime cOut = DateTime.Parse(System.IO.File.ReadLines(logDirectory + @"\" + firstName + lastName + @"\out.6318").Skip(i).Take(1).First());
-
-                    TimeSpan tWorked = cOut.Subtract(cIn);
-                    lHours = lHours + tWorked.TotalHours;
-
+                    lHours += timeClockedOut[i].Subtract(timeClockedIn[i]).Hours;
                 }
                 return lHours;
             }
         }
 
         private bool isClockedIn;
+        /// <value>
+        /// Gets or sets wether or not a user is clocked in
+        /// </value>
         public bool IsClockedIn { get => isClockedIn; set => isClockedIn = value; }
 
-        private DateTime timeClockedIn;
-        public DateTime TimeClockedIn { get => timeClockedIn; set => timeClockedIn = value; }
+        private List<DateTime> timeClockedIn;
+        /// <value>
+        /// Gets or sets a list of every time the user has clocked in
+        /// </value>
+        public List<DateTime> TimeClockedIn { get => timeClockedIn; set => timeClockedIn = value; }
 
-        private DateTime timeClockedOut;
-        public DateTime TimeClockedOut { get => timeClockedOut; set => timeClockedOut = value; }
-
-        private string logDirectory;
-
-        private String userDirectory;
+        private List<DateTime> timeClockedOut;
+        /// <value>
+        /// Gets or sets a list of every time the user has clocked out
+        /// </value>
+        public List<DateTime> TimeClockedOut { get => timeClockedOut; set => timeClockedOut = value; }
         
-
+        /// <summary>
+        /// Sets <paramref name="userID"/>, <paramref name="firstName"/>, and <paramref name="lastName"/> respectively.
+        /// Also initializes list of times clocked in and list of times clocked out
+        /// </summary>
+        /// <param name="userID">The user's ID</param>
+        /// <param name="firstName">The user's first name</param>
+        /// <param name="lastName">The user's last name</param>
         public User(String userID, String firstName, String lastName)
         {
             UserID = userID;
             FirstName = firstName;
             LastName = lastName;
-
-            logDirectory = Environment.CurrentDirectory + @"\Information\Log";
-
-            //create a directory for the user
-            System.IO.Directory.CreateDirectory(this.logDirectory + @"\" + firstName + lastName);
-
-            //create the log files
-            using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(this.logDirectory + @"\" + firstName + lastName + @"\in.6318", true)) { }
-
-            using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(this.logDirectory + @"\" + firstName + lastName + @"\out.6318", true)) { }
-
-            if(System.IO.File.ReadLines(logDirectory + @"\" + firstName + lastName + @"\in.6318").Count() > System.IO.File.ReadLines(logDirectory + @"\" + firstName + lastName + @"\out.6318").Count())
-            {
-                isClockedIn = true;
-                timeClockedIn = DateTime.Parse(System.IO.File.ReadLines(logDirectory + @"\" + firstName + lastName + @"\in.6318").Skip(System.IO.File.ReadLines(logDirectory + @"\" + firstName + lastName + @"\in.6318").Count() - 1).Take(1).First());
-            } else
-            {
-                isClockedIn = false;
-            }
-
-            userDirectory = Environment.CurrentDirectory + @"\Information\Users\" + FirstName + LastName;
+            timeClockedIn = new List<DateTime>();
+            timeClockedOut = new List<DateTime>();
         }
 
-        
+        /// <summary>
+        /// Initializes list of times clocked in and list of times clocked out
+        /// </summary>
+        public User()
+        {
+            timeClockedIn = new List<DateTime>();
+            timeClockedOut = new List<DateTime>();
+        }
+
+        /// <summary>
+        /// Clock the user in
+        /// </summary>
+        /// <returns>Wether or not the user was clocked in</returns>
         public bool clockIn()
         {
             if(isClockedIn)
             {
                 return false;
             }
-            timeClockedIn = DateTime.Now;
-            login(timeClockedIn);
+            timeClockedIn.Add(DateTime.Now);
             isClockedIn = true;
             return true;
         }
 
+        /// <summary>
+        /// Gets the number of hours between the last times clocked in and out
+        /// </summary>
+        /// <returns>Number of hours between last clocks in and out</returns>
         public double getNumberOfHoursElapsedBetweenClocks()
         {
-            TimeSpan tsTimeWorked = timeClockedOut.Subtract(timeClockedIn);
+            TimeSpan tsTimeWorked = timeClockedOut[timeClockedOut.Count - 1].Subtract(timeClockedIn[timeClockedIn.Count - 1]);
             return tsTimeWorked.TotalHours;
         }
 
+        /// <summary>
+        /// Gets the last clock in time
+        /// </summary>
+        /// <returns>The last clock in time</returns>
         public String getFormatedClockInTime()
         {
-            return timeClockedIn.ToShortDateString() + " " + timeClockedIn.ToLongTimeString();
+            return timeClockedIn[timeClockedIn.Count - 1].ToShortDateString() + " " + timeClockedIn[timeClockedIn.Count - 1].ToLongTimeString();
         }
 
+        /// <summary>
+        /// Clocks the user in
+        /// </summary>
+        /// <returns>Wether or not the user was clocked out</returns>
         public bool clockOut()
         {
             if(!isClockedIn)
@@ -118,82 +141,34 @@ namespace FE6318.TimeClockProgram.BusinessLayer
                 return false;
             }
 
-            timeClockedOut = DateTime.Now;
+            timeClockedOut.Add(DateTime.Now);
             isClockedIn = false;
-            logOut(timeClockedOut);
             return true;
         }
 
+        /// <summary>
+        /// Gets the last clock out time formatted
+        /// </summary>
+        /// <returns>The last clock out time formatted</returns>
         public String getFormatedClockOutTime()
         {
-            return timeClockedOut.ToShortDateString() + " " + timeClockedOut.ToLongTimeString();
+            return timeClockedOut[timeClockedOut.Count - 1].ToShortDateString() + " " + timeClockedOut[timeClockedOut.Count - 1].ToLongTimeString();
         }
 
+        /// <summary>
+        /// Clocks in the user if they are not clocked in, or clocks out the user if they are clocked in
+        /// </summary>
         public void clock()
         {
             //if clocked out, clock in
             if(isClockedIn)
             {
-                timeClockedOut = DateTime.Now;
+                timeClockedOut.Add(DateTime.Now);
                 isClockedIn = false;
-                logOut(timeClockedOut);
-                logTimes(timeClockedIn, timeClockedOut);
-                saveHours(timeClockedIn, timeClockedOut);
             } else
             {
-                timeClockedIn = DateTime.Now;
-                login(timeClockedIn);
+                timeClockedIn.Add(DateTime.Now);
                 isClockedIn = true;
-            }
-        }
-
-        private void logTimes(DateTime cIn, DateTime cOut)
-        {
-            //log when the users clocked in and out
-            using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(logDirectory + @"\log.txt" , true))
-            {
-                file.WriteLine(Name + " Clocked In: " + cIn.ToShortDateString() +  " " + cIn.ToLongTimeString() + " Clocked Out: " + cOut.ToShortDateString() + cOut.ToLongTimeString());
-            }
-        }
-
-        private void login(DateTime cIn)
-        {
-            //log when the users clocked in
-            using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(logDirectory + @"\" + FirstName + LastName + @"\in.6318", true))
-            {
-                file.WriteLine(cIn.ToString());
-            }
-        }
-
-        private void logOut(DateTime cOut)
-        {
-            //log when the users clocked out
-            using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(logDirectory + @"\" + FirstName + LastName + @"\out.6318", true))
-            {
-                file.WriteLine(cOut.ToString());
-            }
-        }
-
-        
-
-        private void saveHours(DateTime cIn, DateTime cOut)
-        {
-            //store the current user directory
-            String strCurrentUserDirectory = userDirectory + @"\" + firstName + lastName + ".6318";
-
-            //write to the file the number of hours worked
-            using (System.IO.StreamWriter file =
-                new System.IO.StreamWriter(strCurrentUserDirectory, false)) //false means it will overwrite the current file
-            {
-                //not possible to write to a certain line of a file (as far as I know) So we have to re-write the whole file
-                file.WriteLine(userID);
-                file.WriteLine(firstName);
-                file.WriteLine(lastName);
-                //now we finally can write the number of hours worked
-                file.WriteLine((LoggedHours).ToString());
             }
         }
     }
